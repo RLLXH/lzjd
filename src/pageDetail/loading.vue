@@ -72,7 +72,7 @@ export default {
             .post(login + "?type=" + (this.activeName - 0), data)
             .then(data => {
               console.log("登陆成功");
-              this.$router.push("/Index/Grad");
+              this.$router.push("/Index/staffManagement");
               this.setloadingData(true);
             });
         }

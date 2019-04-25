@@ -17,7 +17,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     res => {
         if (res.status == 200) {
-            return res
+            return res.data
         } else {
 
             return Promise.reject(res)

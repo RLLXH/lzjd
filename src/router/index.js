@@ -4,6 +4,7 @@ import Index from '../components/index.vue'
 import Grad from '../pageDetail/grad.vue'
 import Loading from '../pageDetail/loading.vue'
 import Registered from '../pageDetail/registered.vue'
+import StaffManagement from '../pageDetail/staffManagement.vue'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -27,6 +28,10 @@ export default new Router({
         path:'Registered',
         name:'注册',
         component:Registered
+      },{
+        path:'StaffManagement',
+        name:'员工管理',
+        component:StaffManagement
       }
       ]
     }
