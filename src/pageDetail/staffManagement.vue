@@ -21,10 +21,11 @@
     </el-row>
     <el-table :data="dataList" style="width: 100%" border>
       <el-table-column label="序号" type="index" width="80"></el-table-column>
-      <el-table-column label="操作" width="80">
+      <el-table-column label="操作" width="190">
         <template slot-scope="scope">
           <div>
             <el-button type="text" @click="detailBtn(scope.row.id)">查看</el-button>
+              <el-button type="text" @click="mibileBtn(scope.row.id)">修改</el-button>
           </div>
         </template>
       </el-table-column>
@@ -36,7 +37,7 @@
       <el-table-column label="状态" prop="statusName"></el-table-column>
       <el-table-column label="地址" prop="address"></el-table-column>
     </el-table>
-    <el-dialog title="新增库房" :visible.sync="dialogVisibleAdd" width="20%" center>
+    <el-dialog title="新增员工" :visible.sync="dialogVisibleAdd" width="20%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
           <el-form-item label="名称:">
           <el-input v-model="postData.name"></el-input>
@@ -64,7 +65,35 @@
         <el-button @click="subBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="库房详情" :visible.sync="dialogVisibleDetail" width="30%">
+    <el-dialog title="修改员工" :visible.sync="mobyleVisibleAdd" width="20%" center>
+      <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
+          <el-form-item label="名称:">
+          <el-input v-model="updateDta.name"></el-input>
+        </el-form-item>
+        <el-form-item label="编号:">
+          <el-input v-model="updateDta.code"></el-input>
+        </el-form-item>
+        <el-form-item label="密码:">
+          <el-input v-model="updateDta.password"></el-input>
+        </el-form-item>
+        <el-form-item label="性别:">
+          <el-input v-model="updateDta.sex"></el-input>
+        </el-form-item>
+        <el-form-item label="电话:">
+          <el-input v-model="updateDta.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="状态:">
+          <el-input v-model="updateDta.statusName"></el-input>
+        </el-form-item>
+        <el-form-item label="地址:">
+          <el-input v-model="updateDta.address"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-row class="dialoBtnBox">
+        <el-button @click="updataBtn">提交</el-button>
+      </el-row>
+    </el-dialog>
+    <el-dialog title="员工详情" :visible.sync="dialogVisibleDetail" width="30%">
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
            <el-form-item label="名称:">
           <span>{{detailDtaa.name}}</span>
@@ -96,11 +125,12 @@
   </div>
 </template>
 <script>
-import { employee, employeeAdd, employeeView } from "../api/address.js";
+import { employee, employeeAdd, employeeView,employeeUpdate} from "../api/address.js";
 import axios from "../api/axios.js";
 export default {
   data() {
     return {
+      updateDta:{},
       detailDtaa: {
         address: "",
         code: "",
@@ -129,6 +159,7 @@ export default {
         pageNo: "1",
         pageSize: "20"
       },
+      mobyleVisibleAdd:false,
       dialogVisibleDetail: false,
       dialogVisibleAdd: false,
       dataList: []
@@ -138,6 +169,20 @@ export default {
     this.getList(this.theQuery);
   },
   methods: {
+    updataBtn(){
+      axios.post(employeeUpdate,this.updateDta).then(data=>{
+        console.log(data);
+         this.mobyleVisibleAdd=false;
+      })
+    },
+    mibileBtn(id){
+      this.mobyleVisibleAdd=true;
+      axios.get(employeeView + "?id=" + id).then(data => {
+        console.log(data);
+        this.updateDta = data.data;
+     
+      });
+    },
     quxiaoBtn() {
       this.dialogVisibleDetail = false;
     },

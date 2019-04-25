@@ -5,3 +5,4 @@ export const logout= '/login/logout'//退出登陆
 export const employee='/employee/list '//员工列表
 export const employeeAdd='/employee/add' //新增员工
 export const employeeView='/employee/view'//员工详情
+export const employeeUpdate='/employee/update' //修改员工
