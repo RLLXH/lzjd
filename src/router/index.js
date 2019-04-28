@@ -5,6 +5,8 @@ import Grad from '../pageDetail/grad.vue'
 import Loading from '../pageDetail/loading.vue'
 import Registered from '../pageDetail/registered.vue'
 import StaffManagement from '../pageDetail/staffManagement.vue'
+import Announcement from '../pageDetail/announcement.vue'
+import Dictionary from '../pageDetail/dictionary.vue'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -32,6 +34,14 @@ export default new Router({
         path:'StaffManagement',
         name:'员工管理',
         component:StaffManagement
+      },{
+        path:'Announcement',
+        name:'公告列表',
+        component:Announcement
+      },{
+        path:'Dictionary',
+        name:'字典管理',
+        component:Dictionary
       }
       ]
     }

@@ -1,20 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <el-form label-position="right" label-width="100px" :inline="true">
-        <el-form-item label="库房名称:">
-          <el-input></el-input>
-        </el-form-item>
-        <el-form-item label="库房编号:">
-          <el-input></el-input>
-        </el-form-item>
-        <el-form-item label="是否禁用:">
-          <el-input></el-input>
-        </el-form-item>
-        <el-form-item label=" ">
-          <el-button>查询</el-button>
-        </el-form-item>
-      </el-form>-->
     </div>
     <el-row>
       <el-button class="addBtn" @click="AddnewBtn">增加</el-button>
