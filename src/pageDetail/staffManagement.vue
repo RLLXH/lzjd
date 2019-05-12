@@ -33,31 +33,30 @@
         <el-form-item label="名称:">
           <el-input v-model="postData.name"></el-input>
         </el-form-item>
-        <el-form-item label="编号:">
+        <!-- <el-form-item label="编号:">
           <el-input v-model="postData.code"></el-input>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item label="密码:">
           <el-input v-model="postData.password"></el-input>
         </el-form-item>
         <el-form-item label="性别:">
-          <el-select
-           v-model="postData.sex">
-           <el-option value="0" label="男"></el-option>
+          <el-select v-model="postData.sex">
+            <el-option value="0" label="男"></el-option>
             <el-option value="1" label="女"></el-option>
-           </el-select>
+          </el-select>
           <!-- <el-input v-model="postData.sex"></el-input> -->
         </el-form-item>
         <el-form-item label="电话:">
           <el-input v-model="postData.phone"></el-input>
         </el-form-item>
-        <el-form-item label="状态:">
+        <!-- <el-form-item label="状态:">
           <el-input v-model="postData.statusName"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="地址:">
           <el-input v-model="postData.address"></el-input>
         </el-form-item>
-          <el-form-item label="头像:">
-            <el-upload
+        <el-form-item label="头像:">
+          <el-upload
             action
             :on-exceed="exceed"
             :auto-upload="false"
@@ -65,12 +64,12 @@
             :on-change="trus"
             accept="image/*"
             ref="clear"
-          >
+          > 
             <el-button size="small" type="primary">点击上传头像</el-button>
-            <!-- <div slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
+            <div class="headerImg"><img :src="postData.picture" alt=""></div>
           </el-upload>
         </el-form-item>
-        
+     
       </el-form>
       <el-row class="dialoBtnBox">
         <el-button @click="subBtn">提交</el-button>
@@ -89,12 +88,10 @@
         </el-form-item>
         <el-form-item label="性别:">
           <!-- <el-input v-model="updateDta.sex"> -->
-              <el-select
-           v-model="updateDta.sex">
-           <el-option :value="0" label="男"></el-option>
+          <el-select v-model="updateDta.sex">
+            <el-option :value="0" label="男"></el-option>
             <el-option :value="1" label="女"></el-option>
-           </el-select>
-        
+          </el-select>
         </el-form-item>
         <el-form-item label="电话:">
           <el-input v-model="updateDta.phone"></el-input>
@@ -105,8 +102,8 @@
         <el-form-item label="地址:">
           <el-input v-model="updateDta.address"></el-input>
         </el-form-item>
-         <el-form-item label="头像:">
-            <el-upload
+        <el-form-item label="头像:">
+          <el-upload
             action
             :on-exceed="exceed"
             :auto-upload="false"
@@ -116,7 +113,7 @@
             ref="clear"
           >
             <el-button size="small" type="primary">点击上传头像</el-button>
-            <!-- <div slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
+             <div class="headerImg"><img :src="updateDta.picture" alt=""></div>
           </el-upload>
         </el-form-item>
       </el-form>
@@ -190,7 +187,7 @@ export default {
         sex: "",
         statusCode: "",
         statusName: "",
-        picture:'',
+        picture: ""
       },
       theQuery: {
         pageNo: "1",
@@ -214,8 +211,8 @@ export default {
       form.append("file", file.raw);
       console.log(form);
       axios.post(loginUpload, form).then(data => {
-       this.postData.picture=data;
-        console.log(data,'lkjdafl ')
+        this.postData.picture = data;
+        console.log(data, "lkjdafl ");
       });
       console.log("上传");
       console.log(file);
@@ -223,13 +220,13 @@ export default {
 
       // console.log(this.form.brandLogo);
     },
-     trus1: async function(file) {
+    trus1: async function(file) {
       let form = new FormData();
       form.append("file", file.raw);
       console.log(form);
       axios.post(loginUpload, form).then(data => {
-       this.updateDta.picture=data;
-        console.log(data,'lkjdafl ')
+        this.updateDta.picture = data;
+        console.log(data, "lkjdafl ");
       });
       console.log("上传");
       console.log(file);
@@ -288,5 +285,15 @@ export default {
 }
 .dialoBtnBox {
   text-align: center;
+}
+.headerImg{
+  display: inline-block;
+  margin: auto;
+  width: 30px;
+  height: 30px;  border-radius:15px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

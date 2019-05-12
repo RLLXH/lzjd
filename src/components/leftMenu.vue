@@ -2,7 +2,7 @@
   <div class="all">
     <el-menu class="el-menu-demo" mode="horizontal" router unique-opened>
       <el-menu-item index="/Index/Grad">首页</el-menu-item>
-    <el-menu-item index="/Index/Announcement">公告列表</el-menu-item>
+      <el-menu-item index="/Index/Announcement">公告列表</el-menu-item>
       <el-menu-item index="/Index/grad">公司介绍</el-menu-item>
       <el-menu-item index="/Index/Dictionary" v-if="this.loadingData">数据字典管理</el-menu-item>
       <el-menu-item index="/Index/StaffManagement" v-if="this.loadingData">员工管理</el-menu-item>

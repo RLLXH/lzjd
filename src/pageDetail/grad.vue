@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all">
     <div class="imgBox">
       <el-carousel>
         <el-carousel-item v-for="(item,index) in notelist" :key="index">
@@ -51,6 +51,14 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+
+.el-carousel{
+  background:#CCCCFF;
+}
+.all{
+  background:#99CCFF;
+  height:100%;
+}
 .imgBox {
   width: 100%;
   height: 300px;

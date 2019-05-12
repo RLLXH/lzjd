@@ -37,7 +37,9 @@
 import { login } from "../api/address.js";
 import axios from "../api/axios.js";
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions, mapmutations } = createNamespacedHelpers("loadingstore");
+const { mapState, mapActions, mapmutations } = createNamespacedHelpers(
+  "loadingstore"
+);
 export default {
   data() {
     return {
@@ -53,7 +55,7 @@ export default {
     };
   },
   methods: {
-       ...mapActions(["setloadingData"]),
+    ...mapActions(["setloadingData"]),
     regin() {
       this.$router.push("/Index/Registered");
     },
@@ -71,11 +73,14 @@ export default {
             .post(login + "?type=" + (this.activeName - 0), data)
             .then(data => {
               console.log("登陆成功");
-              this.$router.push("/Index/staffManagement");
-              console.log(data)
-              if(data){
-                  this.setloadingData(true);
-                  console.log('改变菜单')
+              // this.$router.push("/Index/Announcement");
+              this.$router.push({
+                path: "/Index/Announcement"
+              });
+              console.log(data);
+              if (data) {
+                this.setloadingData(true);
+                console.log("改变菜单");
               }
             });
         }

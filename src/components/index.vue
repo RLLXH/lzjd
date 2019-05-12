@@ -7,9 +7,9 @@
       <el-main> 
           <router-view></router-view>
       </el-main>
-      <el-footer>
-        <!-- <fotter></fotter> -->
-      </el-footer>
+      <!-- <el-footer>
+        <fotter></fotter>
+      </el-footer> -->
     </el-container>
   </el-container>
 </template>
@@ -51,7 +51,7 @@ export default {
     }
   }
   .el-main{
-    padding: 0px 0px;
+    padding: 0px 0px; 
   }
   .el-footer{
     padding: 0px 0px;
