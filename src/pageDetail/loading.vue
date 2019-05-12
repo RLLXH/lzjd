@@ -67,14 +67,16 @@ export default {
             password: this.user.password,
             userName: this.user.userName
           };
-
           axios
             .post(login + "?type=" + (this.activeName - 0), data)
             .then(data => {
               console.log("登陆成功");
               this.$router.push("/Index/staffManagement");
               console.log(data)
-              this.setloadingData(data.data);
+              if(data){
+                  this.setloadingData(true);
+                  console.log('改变菜单')
+              }
             });
         }
       });

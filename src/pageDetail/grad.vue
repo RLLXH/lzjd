@@ -97,6 +97,10 @@ export default {
       border: 1px solid gray;
       margin: auto;
       margin-top: 5px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
