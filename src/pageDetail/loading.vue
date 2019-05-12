@@ -73,7 +73,8 @@ export default {
             .then(data => {
               console.log("登陆成功");
               this.$router.push("/Index/staffManagement");
-              this.setloadingData(true);
+              console.log(data)
+              this.setloadingData(data.data);
             });
         }
       });

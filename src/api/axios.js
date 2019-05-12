@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui';
 axios.defaults.baseURL = 'http://47.112.27.58:9021'
 // axios.defaults.withCredentials = true;
+
 //添加请求拦截器
 axios.interceptors.request.use(
     config => {

@@ -14,3 +14,7 @@ export const dictionaryAdd='/dictionary/add' //新增字典
 export const dictionaryList='/dictionary/list' //字典列表
 export const dictionaryView='/dictionary/view' //字典详情
 export const dictionaryUpdate='/dictionary/update' //字典修改
+export const noticPageNoticList='/notice/page/notice/list' //首页公告显示
+export const loginUpload='/login/upload' //上传
+export const applyList='/apply/list'//获取申请数据列表
+export const applyAdd='/apply/add' //添加申请数据

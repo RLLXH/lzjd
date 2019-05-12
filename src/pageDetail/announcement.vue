@@ -48,7 +48,7 @@
       </el-row>
     </el-dialog>
     <el-dialog title="修改员工" :visible.sync="mobyleVisibleAdd" width="20%" center>
-      <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
+      <el-form label-position="right" label-width="100px" :inline="true" :model="updateDta">
          <el-form-item label="编号:">
           <el-input v-model="updateDta.code"></el-input>
         </el-form-item>

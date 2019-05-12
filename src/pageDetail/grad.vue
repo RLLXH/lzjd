@@ -1,96 +1,103 @@
 <template>
   <div>
     <div class="imgBox">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="imgboxBox1"></div>
-          </div>
-          <div class="swiper-slide">
-            <div class="imgboxBox2"></div>
-          </div>
-          <div class="swiper-slide">
-            <div class="imgboxBox3"></div>
-          </div>
-        </div>
-        <!-- 如果需要分页器 -->
-        <!-- <div class="swiper-pagination"></div> -->
-        <!-- 如果需要滚动条 -->
-        <!-- <div class="swiper-scrollbar"></div> -->
-      </div>
+      <el-carousel>
+        <el-carousel-item v-for="(item,index) in notelist" :key="index">
+          <h3 class="small">{{item.title}}</h3>
+        </el-carousel-item>
+      </el-carousel>
     </div>
     <!-- <div class="scarchBox">
      
     </div>-->
     <div class="cenBox">
-      <div class="cenImgBox">
-        <div class="immmBox"></div>
-        <span>人员名称</span>
+      <div class="cenImgBox" v-for="(item,index) in this.dataList" :key="index">
+        <div class="immmBox"><img :src="item.picture"></div>
+        <span>{{'人员名称:'+item.name}}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Swiper from "swiper";
+import { noticPageNoticList, employee } from "../api/address.js";
+import axios from "../api/axios.js";
 export default {
   data() {
-    return {};
+    return {
+      theQuery: {
+        pageNo: "1",
+        pageSize: "20"
+      },
+      notelist: [],
+      dataList: []
+    };
   },
-  mounted() {
-    new Swiper(".swiper-container", {
-      autoplay: true
+  created() {
+    axios.get(noticPageNoticList).then(data => {
+      console.log(data, "1231231");
+      this.notelist = data.data;
     });
-  }
+    this.getList(this.theQuery);
+  },
+  methods: {
+    getList(data) {
+      axios.post(employee, data).then(data => {
+        console.log(data);
+        this.dataList = data.data.dataList;
+      });
+    }
+  },
+  mounted() {}
 };
 </script>
 <style lang="less" scoped>
 .imgBox {
   width: 100%;
   height: 300px;
+  text-align: center;
   // background-color: green;
 }
-.swiper-container {
-        width: 500px;
-        height: 300px;
-        margin: 20px auto;
-    }
-.imgboxBox1{
- background: green;
+
+.imgboxBox1 {
+  background: green;
   height: 200px;
   width: 400px;
 }
-.imgboxBox2{
- background: yellow;
+.imgboxBox2 {
+  background: yellow;
   height: 200px;
   width: 400px;
 }
-.imgboxBox3{
- background: red;
+.imgboxBox3 {
+  background: red;
   height: 200px;
   width: 400px;
 }
-.scarchBox{
+.scarchBox {
   width: 60%;
   margin: auto;
-  .el-input{
+  .el-input {
     width: 60%;
   }
 }
-.cenBox{
+.cenBox {
   width: 60%;
   margin: auto;
-  .cenImgBox{
+  .cenImgBox {
     width: 25%;
     height: 400px;
-    border: 1px solid gray;
-   .immmBox{
-     height: 300px;
-     width: 95%;
+    display: inline-block;
+    div{
+      display: inline-block;
+    };
+    .immmBox {
+      height: 300px;
+      width: 95%;
       border: 1px solid gray;
       margin: auto;
       margin-top: 5px;
-   }
+    }
   }
 }
 </style>
