@@ -4,12 +4,11 @@
       <el-carousel>
         <el-carousel-item v-for="(item,index) in notelist" :key="index">
           <h3 class="small">{{item.title}}</h3>
+          <span>{{item.text}}</span>
         </el-carousel-item>
       </el-carousel>
     </div>
-    <!-- <div class="scarchBox">
-     
-    </div>-->
+    <p>保洁人员：</p>
     <div class="cenBox">
       <div class="cenImgBox" v-for="(item,index) in this.dataList" :key="index">
         <div class="immmBox"><img :src="item.picture"></div>
@@ -81,6 +80,12 @@ export default {
     width: 60%;
   }
 }
+p{
+  width: 60%;
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 20px;
+};
 .cenBox {
   width: 60%;
   margin: auto;

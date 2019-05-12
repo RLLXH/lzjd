@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column label="编号" prop="code"></el-table-column>
       <el-table-column label="名称" prop="name"></el-table-column>
-      <el-table-column label="密码" prop="password"></el-table-column>
+      <!-- <el-table-column label="密码" prop="password"></el-table-column> -->
       <el-table-column label="性别" prop="sex">
         <template slot-scope="scope">
           <div>
@@ -82,7 +82,7 @@
           <el-input v-model="updateDta.name"></el-input>
         </el-form-item>
         <el-form-item label="编号:">
-          <el-input v-model="updateDta.code"></el-input>
+          <el-input v-model="updateDta.code" disabled></el-input>
         </el-form-item>
         <el-form-item label="密码:">
           <el-input v-model="updateDta.password"></el-input>
