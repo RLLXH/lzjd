@@ -55,12 +55,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setloadingData"]),
+    ...mapActions(["setloadingData", "setuserInfo"]),
     regin() {
       this.$router.push("/Index/Registered");
     },
     handleClick() {
-      (this.user.password = ""), (this.user.userName = "");
+      console.log(this.activeName, "???????");
+      this.user.password = "";
+      this.user.userName = "";
     },
     loadBtn(formName) {
       this.$refs[formName].validate(valid => {
@@ -72,15 +74,34 @@ export default {
           axios
             .post(login + "?type=" + (this.activeName - 0), data)
             .then(data => {
-              console.log("登陆成功");
-              // this.$router.push("/Index/Announcement");
-              this.$router.push({
-                path: "/Index/Announcement"
-              });
-              console.log(data);
-              if (data) {
-                this.setloadingData(true);
-                console.log("改变菜单");
+              if (data.code == "0") {
+                if (data.data == "admin") {
+                  // data.code
+                  console.log(data,"??????")
+                  data.data = {
+                    code:"2"
+                  };
+                   sessionStorage.setItem("user", JSON.stringify(data.data));
+                  this.$message.success("管理员登陆成功！");
+                  this.$router.push({
+                    path: "/Index/Grad"
+                  });
+                } else {
+                  console.log("登陆成功", data.data);
+                  this.$message.success("登陆成功！");
+                  data.data.code = this.activeName;
+                  sessionStorage.setItem("user", JSON.stringify(data.data));
+                  this.setuserInfo(data.data);
+                  this.$router.push({
+                    path: "/Index/Grad"
+                  });
+                  if (data) {
+                    this.setloadingData(true);
+                    console.log("改变菜单");
+                  }
+                }
+              } else {
+                this.$message.error("账号密码错误！");
               }
             });
         }

@@ -9,6 +9,9 @@ import Announcement from '../pageDetail/announcement.vue'
 import Dictionary from '../pageDetail/dictionary.vue'
 import applicationManagement from '../pageDetail/applicationManagement.vue'
 import applicationManagementAddNew from '../pageDetail/applicationManagement/applicationManagementAddNew.vue'
+import employeesView from '../pageDetail/employees/employeesView.vue'
+import orderManegement from '../pageDetail/orderManegement'
+import companyIntroduction from '../pageDetail/companyIntroduction.vue'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -24,35 +27,48 @@ export default new Router({
         path: 'Grad',
         name: '首页',
         component: Grad,
+      }, {
+        path: 'Loading',
+        name: '登陆',
+        component: Loading
+      }, {
+        path: 'Registered',
+        name: '注册',
+        component: Registered
+      }, {
+        path: 'StaffManagement',
+        name: '员工管理',
+        component: StaffManagement
+      }, {
+        path: 'Announcement',
+        name: '公告列表',
+        component: Announcement
+      }, {
+        path: 'Dictionary',
+        name: '字典管理',
+        component: Dictionary
+      }, {
+        path: 'applicationManagement',
+        name: '申请管理',
+        component: applicationManagement
+      }, {
+        path: 'applicationManagementAddNew',
+        name: '新增申请',
+        component: applicationManagementAddNew
+      }, {
+        path: 'employeesView',
+        name: '员工信息',
+        component: employeesView
       },{
-        path:'Loading',
-        name:'登陆',
-        component:Loading
-      },{
-        path:'Registered',
-        name:'注册',
-        component:Registered
-      },{
-        path:'StaffManagement',
-        name:'员工管理',
-        component:StaffManagement
-      },{
-        path:'Announcement',
-        name:'公告列表',
-        component:Announcement
-      },{
-        path:'Dictionary',
-        name:'字典管理',
-        component:Dictionary
-      },{
-        path:'applicationManagement',
-        name:'申请管理',
-        component:applicationManagement
-      },{
-        path:'applicationManagementAddNew',
-        name:'新增申请',
-        component:applicationManagementAddNew
-      }
+        path: 'orderManegement',
+        name: '订单管理',
+        component: orderManegement
+      },
+      {
+        path: 'companyIntroduction',
+        name: '公司介绍',
+        component: companyIntroduction
+      },
       ]
     }
   ]

@@ -18,3 +18,10 @@ export const noticPageNoticList='/notice/page/notice/list' //首页公告显示
 export const loginUpload='/login/upload' //上传
 export const applyList='/apply/list'//获取申请数据列表
 export const applyAdd='/apply/add' //添加申请数据
+
+export const dictionaryGetapi = "/dictionary/getapi"//外部获取字典信息
+export const oderList = "/oder/lits"//订单列表查询
+export const oderAdd = "/oder/add"//订单创建
+export const oderView = "/oder/view"//订单详情
+export const oderUpdate = "/oder/update"//修改订单
+export const add = "/add"//增加评论

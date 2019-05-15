@@ -17,10 +17,10 @@
       <el-table-column label="编号" prop="code"></el-table-column>
       <el-table-column label="名称" prop="name"></el-table-column>
     </el-table>
-    <el-dialog title="新增字典" :visible.sync="dialogVisibleAdd" width="60%" center>
+    <el-dialog title="新增基本信息" :visible.sync="dialogVisibleAdd" width="60%" center>
       <el-form :model="postData" :rules="rules" ref="postData">
-        <el-form-item label="字典名称 :" prop="name">
-          <el-input v-model="postData.name" placeholder="字典名称"></el-input>
+        <el-form-item label="基本信息名称 :" prop="name">
+          <el-input v-model="postData.name" placeholder="基本信息名称"></el-input>
         </el-form-item>
         <el-table
           :data="postData.list"
@@ -55,10 +55,10 @@
         <el-button @click="subBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="修改字典" :visible.sync="mobyleVisibleAdd" width="60%" center>
+    <el-dialog title="修改基本信息" :visible.sync="mobyleVisibleAdd" width="60%" center>
       <el-form :model="updateDta" :rules="rules" ref="updateDta">
-        <el-form-item label="字典名称 :" prop="name">
-          <el-input v-model="updateDta.name" placeholder="字典名称"></el-input>
+        <el-form-item label="基本信息名称 :" prop="name">
+          <el-input v-model="updateDta.name" placeholder="基本信息名称"></el-input>
         </el-form-item>
         <el-table
           :data="updateDta.list"
@@ -94,9 +94,9 @@
         <el-button @click="updataBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="字典详情" :visible.sync="dialogVisibleDetail" width="30%">
+    <el-dialog title="基本信息详情" :visible.sync="dialogVisibleDetail" width="30%">
       <el-form :model="detailDtaa" :rules="rules" ref="detailDtaa">
-        <el-form-item label="字典名称 :" prop="name">
+        <el-form-item label="基本信息名称 :" prop="name">
           <span>{{detailDtaa.name}}</span>
         </el-form-item>
         <el-table

@@ -3,14 +3,14 @@
     <el-menu class="el-menu-demo" mode="horizontal" router unique-opened>
       <el-menu-item index="/Index/Grad">首页</el-menu-item>
       <el-menu-item index="/Index/Announcement">公告列表</el-menu-item>
-      <el-menu-item index="/Index/grad">公司介绍</el-menu-item>
-      <el-menu-item index="/Index/Dictionary" v-if="this.loadingData">数据字典管理</el-menu-item>
-      <el-menu-item index="/Index/StaffManagement" v-if="this.loadingData">员工管理</el-menu-item>
-      <el-menu-item index="/Index/applicationManagement" v-if="this.loadingData">申请管理</el-menu-item>
-      <el-menu-item index="/Index/grad" v-if="this.loadingData">订单管理</el-menu-item>
-      <el-menu-item index="/Index/grad" v-if="this.loadingData">工资管理</el-menu-item>
-      <el-menu-item index="/Index/Loading" v-if="!this.loadingData">登陆</el-menu-item>
-      <el-menu-item @click="logoutBtn()" v-if="this.loadingData">退出登陆</el-menu-item>
+      <el-menu-item index="/Index/companyIntroduction">公司介绍</el-menu-item>
+      <el-menu-item index="/Index/Dictionary"  v-if="this.userInfo.code =='2'">基本信息管理</el-menu-item>
+      <el-menu-item index="/Index/StaffManagement" v-if="this.userInfo.code =='2'">员工管理</el-menu-item>
+      <el-menu-item index="/Index/applicationManagement" v-if="this.userInfo.code =='2'||this.userInfo.code =='1'">申请管理</el-menu-item>
+      <el-menu-item index="/Index/orderManegement"   v-if="this.userInfo.code">订单管理</el-menu-item>
+      <el-menu-item index="/Index/grad" v-if="this.userInfo.code =='2'||this.userInfo.code =='1'">工资管理</el-menu-item>
+      <el-menu-item index="/Index/Loading" v-if="!this.userInfo.code">登陆</el-menu-item>
+      <el-menu-item @click="logoutBtn()"  v-if="this.userInfo.code">退出登陆</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -26,17 +26,27 @@ export default {
     return {};
   },
   created() {
-    console.log(this.loadingData, "管理登陆");
+    if(JSON.parse(sessionStorage.getItem('user')).code){
+    sessionStorage.getItem('user');
+    console.log(sessionStorage.getItem('user'))
+    this.setuserInfo(JSON.parse(sessionStorage.getItem('user')));
+    console.log(this.userInfo, "管理登陆");
+    }
+console.log(this.userInfo)
   },
   computed: {
-    ...mapState(["loadingData"])
+    ...mapState(["loadingData","userInfo"])
   },
   methods: {
-    ...mapActions(["setloadingData"]),
+    ...mapActions(["setloadingData","setuserInfo"]),
     logoutBtn() {
       axios.get(logout).then(data => {
         console.log("退出登陆成功");
+         this.$message.warning('退出登录成功!');
+        sessionStorage.clear();
+        this.$router.push('/Index/Loading');
         this.setloadingData(false);
+        this.setuserInfo({});
       });
     }
   }

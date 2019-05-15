@@ -2,7 +2,7 @@
   <div class="all">
     <div class="imgBox">
       <el-carousel>
-        <el-carousel-item v-for="(item,index) in notelist" :key="index">
+        <el-carousel-item v-for="(item,index) in notelist" :key="index" @click="announcementView()">
           <h3 class="small">{{item.title}}</h3>
           <span>{{item.text}}</span>
         </el-carousel-item>
@@ -10,7 +10,7 @@
     </div>
     <p>保洁人员：</p>
     <div class="cenBox">
-      <div class="cenImgBox" v-for="(item,index) in this.dataList" :key="index">
+      <div class="cenImgBox" v-for="(item,index) in this.dataList" :key="index" @click="employeesView(item)">
         <div class="immmBox"><img :src="item.picture"></div>
         <span>{{'人员名称:'+item.name}}</span>
       </div>
@@ -34,17 +34,38 @@ export default {
   },
   created() {
     axios.get(noticPageNoticList).then(data => {
-      console.log(data, "1231231");
       this.notelist = data.data;
     });
     this.getList(this.theQuery);
   },
   methods: {
+    //员工信息
+    employeesView(val){
+      if(JSON.parse(sessionStorage.getItem("user"))){
+        if(JSON.parse(sessionStorage.getItem("user")).code=="0"){
+      this.$router.push({
+        path: "/Index/employeesView",
+        query: {
+          id: val.id
+        }
+      });
+        }else if(JSON.parse(sessionStorage.getItem("user")).code=="1"){
+          this.$message.error('员工禁止查看！');
+        }
+    
+      }else{
+        this.$message.error('请先登录！');
+      }
+
+    },
     getList(data) {
       axios.post(employee, data).then(data => {
-        console.log(data);
         this.dataList = data.data.dataList;
       });
+    },
+    //公告查看
+    announcementView(){
+      console.log('================================')
     }
   },
   mounted() {}
@@ -56,7 +77,7 @@ export default {
   background:#CCCCFF;
 }
 .all{
-  background:#99CCFF;
+  // background:#99CCFF;
   height:100%;
 }
 .imgBox {
@@ -89,32 +110,41 @@ export default {
   }
 }
 p{
-  width: 60%;
+  width: 70%;
   margin: auto;
   margin-bottom: 20px;
   font-size: 20px;
 };
 .cenBox {
-  width: 60%;
+  width: 70%;
   margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   .cenImgBox {
-    width: 25%;
-    height: 400px;
+    width: 20%;
+    // height: 400px;
+    margin-bottom: 20px;
     display: inline-block;
+    border: 1px solid rgb(255, 255, 255);
     div{
       display: inline-block;
     };
     .immmBox {
       height: 300px;
       width: 95%;
-      border: 1px solid gray;
-      margin: auto;
-      margin-top: 5px;
+      border: 1px solid rgb(255, 255, 255);
+      display: block;
+      margin:5px auto;
+      // margin-top: 5px;
       img{
         width: 100%;
         height: 100%;
       }
     }
+  }
+  .cenImgBox:hover{
+    box-shadow: 2px 4px 6px rgb(168, 168, 168);
   }
 }
 </style>

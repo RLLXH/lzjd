@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div></div>
+    <!-- <div></div>
     <el-row>
       <el-button class="addBtn" @click="AddnewBtn">增加</el-button>
     </el-row>
@@ -73,7 +73,25 @@
       <el-row class="dialoBtnBox">
         <el-button @click="updataBtn">提交</el-button>
       </el-row>
-    </el-dialog>
+    </el-dialog> -->
+
+    <!-- 用户查看 -->
+      <el-table :data="dataList" style="width: 100%" :show-header="false" @row-click="detailBtn">
+      <el-table-column label="序号" type="index" width="80"></el-table-column>
+      <!-- <el-table-column label="操作" width="190">
+        <template slot-scope="scope">
+          <div>
+            <el-button type="text" @click="detailBtn(scope.row.id)">查看</el-button>
+          </div>
+        </template>
+      </el-table-column> -->
+      <el-table-column label="内容" prop="text"></el-table-column>
+      <el-table-column label="编号"></el-table-column>
+      <el-table-column label="标题"></el-table-column>
+      
+      <el-table-column label="开始时间" prop="startDate"></el-table-column>
+    </el-table>
+    <!-- 公告详情 -->
     <el-dialog title="公告详情" :visible.sync="dialogVisibleDetail" width="30%">
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
         <el-form-item label="编号:">
@@ -189,9 +207,9 @@ export default {
       this.dialogVisibleAdd = true;
     },
     //详情
-    detailBtn(id) {
+    detailBtn(row) {
       this.dialogVisibleDetail = true;
-      axios.get(noticeView + "?id=" + id).then(data => {
+      axios.get(noticeView + "?id=" + row.id).then(data => {
         console.log(data);
         this.detailDtaa = data.data;
       });
