@@ -82,6 +82,7 @@ export default {
                     code:"2"
                   };
                    sessionStorage.setItem("user", JSON.stringify(data.data));
+                   this.setuserInfo(data.data);
                   this.$message.success("管理员登陆成功！");
                   this.$router.push({
                     path: "/Index/Grad"

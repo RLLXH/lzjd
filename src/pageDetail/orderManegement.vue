@@ -82,8 +82,90 @@
         </el-collapse-item>
       </el-collapse>
     </div>
-    <div v-if="this.state == '1'">
+    <div class="overallPlanning" v-if="this.state == '1'">
       <el-collapse>
+        <el-collapse-item title="待确认" name="2">
+          <el-table :data="paymentHasBeen" style="width: 100%" border>
+            <el-table-column label="序号" type="index" width="80"></el-table-column>
+            <el-table-column label="操作" width="190">
+              <template slot-scope="scope">
+                <div>
+                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="affirm(scope.row.id)">确认</el-button>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="姓名" prop="employeeName"></el-table-column>
+            <el-table-column label="地址" prop="address"></el-table-column>
+            <el-table-column label="服务类型" prop="serviceName"></el-table-column>
+            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="总金额" prop="cost"></el-table-column>
+            <el-table-column label="状态">{{"待确认"}}</el-table-column>
+            <el-table-column label="时间" prop="startDate"></el-table-column>
+          </el-table>
+        </el-collapse-item>
+        <el-collapse-item title="待评价" name="3">
+          <el-table :data="roEvaluate" style="width: 100%" border>
+            <el-table-column label="序号" type="index" width="80"></el-table-column>
+            <el-table-column label="操作" width="190">
+              <template slot-scope="scope">
+                <div>
+                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="姓名" prop="employeeName"></el-table-column>
+            <el-table-column label="地址" prop="address"></el-table-column>
+            <el-table-column label="服务类型" prop="serviceName"></el-table-column>
+            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="总金额" prop="cost"></el-table-column>
+            <el-table-column label="状态">{{"待评价"}}</el-table-column>
+            <el-table-column label="时间" prop="startDate"></el-table-column>
+          </el-table>
+        </el-collapse-item>
+        <el-collapse-item title="已完成" name="4">
+          <el-table :data="hasBeenCompleted" style="width: 100%" border>
+            <el-table-column label="序号" type="index" width="80"></el-table-column>
+            <el-table-column label="操作" width="190">
+              <template slot-scope="scope">
+                <div>
+                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="姓名" prop="employeeName"></el-table-column>
+            <el-table-column label="地址" prop="address"></el-table-column>
+            <el-table-column label="服务类型" prop="serviceName"></el-table-column>
+            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="总金额" prop="cost"></el-table-column>
+            <el-table-column label="状态">{{"已完成"}}</el-table-column>
+            <el-table-column label="时间" prop="startDate"></el-table-column>
+          </el-table>
+        </el-collapse-item>
+      </el-collapse>
+    </div>
+    <div class="overallPlanning" v-if="this.state == '2'">
+      <el-collapse>
+        <el-collapse-item class="forThePayment" title="待付款" name="1">
+          <el-table :data="forThePayment" style="width: 100%" border>
+            <el-table-column label="序号" type="index" width="80"></el-table-column>
+            <el-table-column label="操作" width="190">
+              <template slot-scope="scope">
+                <div>
+                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentModify(scope.row.id)">修改</el-button>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="姓名" prop="employeeName"></el-table-column>
+            <el-table-column label="地址" prop="address"></el-table-column>
+            <el-table-column label="服务类型" prop="serviceName"></el-table-column>
+            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="总金额" prop="cost"></el-table-column>
+            <el-table-column label="状态">{{"待付款"}}</el-table-column>
+            <el-table-column label="时间" prop="startDate"></el-table-column>
+          </el-table>
+        </el-collapse-item>
         <el-collapse-item title="待确认" name="2">
           <el-table :data="paymentHasBeen" style="width: 100%" border>
             <el-table-column label="序号" type="index" width="80"></el-table-column>
@@ -331,6 +413,11 @@ export default {
       this.staffPaymentHasBeenMessage();
       this.staffRoEvaluateMessage();
       this.staffHasBeenCompletedMessage();
+    } else if (this.state == "2") {
+      this.adminForThePaymentMessage();
+      this.adminPaymentHasBeenMessage();
+      this.adminRoEvaluateMessage();
+      this.adminHasBeenCompletedMessage();
     }
     axios.get(dictionaryGetapi + "?dicCode=" + "ZD20190015").then(data => {
       this.evaluate = data.data;
@@ -526,6 +613,52 @@ export default {
             this.staffRoEvaluateMessage();
           }
         });
+      });
+    },
+    //管理员获取列表
+    adminForThePaymentMessage() {
+      let val = {
+        pageNo: 1,
+        pageSize: 5,
+        statusCode: "0"
+      };
+      axios.post(oderList, val).then(data => {
+        this.forThePayment = data.data.dataList;
+      });
+    },
+    //已付款列表
+    adminPaymentHasBeenMessage() {
+      let val = {
+        pageNo: 1,
+        pageSize: 5,
+        statusCode: "1"
+      };
+      axios.post(oderList, val).then(data => {
+        console.log(data);
+        this.paymentHasBeen = data.data.dataList;
+      });
+    },
+    //待评价列表
+    adminRoEvaluateMessage() {
+      let val = {
+        pageNo: 1,
+        pageSize: 20,
+        statusCode: "2"
+      };
+      axios.post(oderList, val).then(data => {
+        this.roEvaluate = data.data.dataList;
+      });
+    },
+    //完成列表
+    adminHasBeenCompletedMessage() {
+      let val = {
+        pageNo: 1,
+        pageSize: 5,
+        statusCode: "3"
+      };
+      axios.post(oderList, val).then(data => {
+        // console.log(data);
+        this.hasBeenCompleted = data.data.dataList;
       });
     },
     //评论弹窗

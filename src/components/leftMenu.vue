@@ -26,13 +26,10 @@ export default {
     return {};
   },
   created() {
-    if(JSON.parse(sessionStorage.getItem('user')).code){
-    sessionStorage.getItem('user');
-    console.log(sessionStorage.getItem('user'))
+    if(JSON.parse(sessionStorage.getItem('user'))){
     this.setuserInfo(JSON.parse(sessionStorage.getItem('user')));
     console.log(this.userInfo, "管理登陆");
     }
-console.log(this.userInfo)
   },
   computed: {
     ...mapState(["loadingData","userInfo"])
