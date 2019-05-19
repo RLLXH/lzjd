@@ -12,6 +12,7 @@ import applicationManagementAddNew from '../pageDetail/applicationManagement/app
 import employeesView from '../pageDetail/employees/employeesView.vue'
 import orderManegement from '../pageDetail/orderManegement'
 import companyIntroduction from '../pageDetail/companyIntroduction.vue'
+import serveType from '../pageDetail/serveType'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -68,6 +69,11 @@ export default new Router({
         path: 'companyIntroduction',
         name: '公司介绍',
         component: companyIntroduction
+      },
+      {
+        path: 'serveType',
+        name: '公司介绍',
+        component: serveType
       },
       ]
     }

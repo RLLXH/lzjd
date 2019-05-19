@@ -4,6 +4,7 @@
       <el-menu-item index="/Index/Grad">首页</el-menu-item>
       <el-menu-item index="/Index/Announcement">公告列表</el-menu-item>
       <el-menu-item index="/Index/companyIntroduction">公司介绍</el-menu-item>
+      <el-menu-item index="/Index/serveType"  v-if="this.userInfo.code =='2'">服务类型</el-menu-item>
       <el-menu-item index="/Index/Dictionary"  v-if="this.userInfo.code =='2'">基本信息管理</el-menu-item>
       <el-menu-item index="/Index/StaffManagement" v-if="this.userInfo.code =='2'">员工管理</el-menu-item>
       <el-menu-item index="/Index/applicationManagement" v-if="this.userInfo.code =='2'||this.userInfo.code =='1'">申请管理</el-menu-item>

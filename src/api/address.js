@@ -25,3 +25,8 @@ export const oderAdd = "/oder/add"//订单创建
 export const oderView = "/oder/view"//订单详情
 export const oderUpdate = "/oder/update"//修改订单
 export const add = "/add"//增加评论
+
+export const serveAdd = "/serviceType/add"//增加服务类型
+export const serveList = "/serviceType/list"//获取服务类型列表
+export const serveView = "/serviceType/view"//获取服务类型详情
+export const serveUpdate = "/serviceType/update"//获取服务类型详情
