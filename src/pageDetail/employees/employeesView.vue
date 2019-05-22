@@ -56,7 +56,7 @@
           <el-input v-model="reservationInfo.address"></el-input>
         </el-form-item>
             <el-form-item label="单位 : " prop="unit">
-          <el-input v-model="reservationInfo.unit"></el-input>
+         <span style="width:200px;display:block">{{reservationInfo.unit}}</span>
         </el-form-item>
         <el-form-item label="备注 : " prop="houseName">
           <el-input type="textarea" v-model="reservationInfo.note"></el-input>
@@ -120,6 +120,7 @@ export default {
 console.log(this.$route.query.data)
 this.reservationInfo.serviceName=this.$route.query.data.name;
 this.reservationInfo.serviceCode=this.$route.query.data.code;
+this.reservationInfo.unit=this.$route.query.data.unit;
   },
   methods: {
     //计算总价

@@ -1,6 +1,25 @@
 <template>
   <div>
-    <div></div>
+      <div class="userWage" v-if="this.userInfo.code == '1'">
+  <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
+        <el-form-item label="名称:">
+          <span>{{postData.epmName}}</span>
+        </el-form-item>
+        <el-form-item label="编号:">
+          <span>{{postData.epmCode}}</span>
+        </el-form-item>
+        <el-form-item label="基础工资:">
+          <span>{{postData.baseSalary}}</span>
+        </el-form-item>
+        <el-form-item label="小时费:">
+          <span>{{postData.cost}}</span>
+        </el-form-item>
+        <el-form-item label="小时绩效:">
+          <span>{{postData.performance}}</span>
+        </el-form-item>
+      </el-form>
+      </div>
+    <div v-if="this.userInfo.code == '2'">
     <el-table :data="dataList" style="width: 100%" border>
       <el-table-column label="序号" type="index" width="80"></el-table-column>
       <el-table-column label="操作" width="190">
@@ -62,6 +81,7 @@
         <el-button @click="quxiaoBtn">取消</el-button>
       </el-row>
     </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -78,12 +98,13 @@ import {
 //   correlationUpdate
 wageList,
 wageView,
-wageUpdate
+wageUpdate,
 } from "../api/address.js";
 import axios from "../api/axios.js";
 export default {
   data() {
     return {
+        userInfo:{},
       props: {
         label: "name",
         value: "code"
@@ -128,6 +149,15 @@ export default {
   created() {
     this.getList(this.theQuery);
     // this.service();
+    this.userInfo = JSON.parse(sessionStorage.getItem('user'));
+    console.log(this.userInfo)
+    if(this.userInfo.code=="1"){
+axios.get(wageView+"?id="+this.userInfo.code).then(data=>{
+    console.log(data)
+    this.postData = data.data
+})
+    }
+
   },
   methods: {
 
@@ -166,7 +196,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .addBtn {
   margin: 10px 0px;
 }
@@ -183,5 +213,10 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.userWage{
+    width: 50%;
+    margin: 100px auto;
+    border:1px solid black
 }
 </style>

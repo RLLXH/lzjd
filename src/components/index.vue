@@ -4,12 +4,12 @@
       <el-header>
         <left-menu class="left-menu"></left-menu>
       </el-header>
-      <el-main> 
-          <router-view></router-view>
+      <el-main>
+        <router-view></router-view>
       </el-main>
       <!-- <el-footer>
         <fotter></fotter>
-      </el-footer> -->
+      </el-footer>-->
     </el-container>
   </el-container>
 </template>
@@ -17,7 +17,7 @@
 <script>
 import leftMenu from "../components/leftMenu.vue";
 import indexTab from "../components/indexTab.vue";
-import fotter from "../components/fotter.vue"
+import fotter from "../components/fotter.vue";
 export default {
   data() {
     return {};
@@ -35,6 +35,7 @@ export default {
 @percent: 100%;
 .visit {
   width: 100%;
+  background: #f1f1f1;
   height: @percent;
   .content {
     width: 100%;
@@ -45,20 +46,19 @@ export default {
     text-align: center;
     background-color: #f5f5f5;
     .left-menu {
-      float:right;
+      float: right;
       text-align: center;
       margin-right: 20px;
     }
   }
-  .el-main{
-    padding: 0px 0px; 
-  }
-  .el-footer{
+  .el-main {
     padding: 0px 0px;
   }
-  .el-tabs__item{
-    width: 200px!important;
+  .el-footer {
+    padding: 0px 0px;
+  }
+  .el-tabs__item {
+    width: 200px !important;
+  }
 }
-}
-
 </style>

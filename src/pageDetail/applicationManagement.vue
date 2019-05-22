@@ -13,19 +13,10 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="编号" prop="code"></el-table-column>
-      <el-table-column label="名称" prop="name"></el-table-column>
-      <el-table-column label="密码" prop="password"></el-table-column>
-      <el-table-column label="性别" prop="sex">
-        <template slot-scope="scope">
-          <div>
-            <span>{{scope.row.sex?'女':'男'}}</span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="电话" prop="phone"></el-table-column>
-      <el-table-column label="状态" prop="statusName"></el-table-column>
-      <el-table-column label="地址" prop="address"></el-table-column>
+        <el-table-column label="申请编号" prop="applyCode"></el-table-column>
+      <el-table-column label="员工编号" prop="applyUserCode"></el-table-column>
+      <el-table-column label="名称" prop="applyUserName"></el-table-column>
+      <el-table-column label="状态" prop="applySatatusName"></el-table-column>
     </el-table>
   </div>
 </template>

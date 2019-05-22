@@ -334,7 +334,7 @@ export default {
     increaseService(val) {
       axios.get(correlationGet + "?employeeCode=" + val.code).then(data => {
         console.log(data);
-        if (data.data.length >= 0) {
+        if (data.data.length > 0) {
           this.employeeSer = [];
           data.data.map((v, k) => {
             this.employeeSer.push({

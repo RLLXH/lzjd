@@ -12,7 +12,13 @@
       <el-menu-item index="/Index/orderManegement"   v-if="this.userInfo.code">订单管理</el-menu-item>
       <el-menu-item index="/Index/wageManagement" v-if="this.userInfo.code =='2'||this.userInfo.code =='1'">工资管理</el-menu-item>
       <el-menu-item index="/Index/Loading" v-if="!this.userInfo.code">登陆</el-menu-item>
-      <el-menu-item @click="logoutBtn()"  v-if="this.userInfo.code">退出登陆</el-menu-item>
+      <!-- <el-menu-item @click="logoutBtn()"  v-if="this.userInfo.code">退出登陆</el-menu-item> -->
+       <el-submenu index="2">
+    <template index="2-1" slot="title" v-if="this.userInfo.code"><i class="el-icon-more-outline"></i></template>
+    <el-menu-item @click="logoutBtn()"  v-if="this.userInfo.code">退出登陆</el-menu-item>
+    <el-menu-item index="/Index/personalInfo" v-if="this.userInfo.code =='0'||this.userInfo.code =='1'">个人信息</el-menu-item>
+
+  </el-submenu>
     </el-menu>
   </div>
 </template>

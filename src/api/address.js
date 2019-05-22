@@ -42,3 +42,4 @@ export const correlationUpdate = "/correlation/update"//修改员工关联服务
 export const wageList = "/wage/list"//获取工资列表
 export const wageView ="/wage/view"//获取工资详情
 export const wageUpdate = "/wage/update"//修改工资
+export const employeeViewCode = "/employee/viewByCode"//获取员工个人信息

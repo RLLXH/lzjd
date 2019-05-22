@@ -8,13 +8,25 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <div class="server">
+    <div v-if="this.service.length>0" class="server">
       <div class="theMain">
-        <img @click="convention(4)" src="../assets/保洁.png" alt>
+        <p style="text-align:center">{{this.service[2].name}}</p>
+        <img @click="convention(4)" :src="this.service[2].picture" alt>
+        <p>{{this.service[2].text}}</p>
       </div>
-      <div class="secondary">
-        <img @click="convention(6)" src="../assets/保姆.png" alt>
-        <img @click="convention(5)" src="../assets/维修.png" alt>
+      <div style="width:150px">
+        <div class="secondary">
+          <p style="text-align:center">{{this.service[0].name}}</p>
+          <img @click="convention(6)" :src="this.service[0].picture" alt>
+          <!-- <img @click="convention(5)" :src="this.service[0].picture" alt> -->
+          <p>{{this.service[0].text}}</p>
+        </div>
+        <div class="secondary">
+          <!-- <img @click="convention(6)" :src="this.service[1].picture" alt> -->
+          <p style="text-align:center">{{this.service[1].name}}</p>
+          <img @click="convention(5)" :src="this.service[1].picture" alt>
+          <p>{{this.service[1].text}}</p>
+        </div>
       </div>
     </div>
     <!-- <p>保洁人员：</p>
@@ -35,11 +47,12 @@
 </template>
 
 <script>
-import { noticPageNoticList, employee } from "../api/address.js";
+import { noticPageNoticList, employee, serveList } from "../api/address.js";
 import axios from "../api/axios.js";
 export default {
   data() {
     return {
+      service: [],
       theQuery: {
         pageNo: "1",
         pageSize: "20"
@@ -52,17 +65,20 @@ export default {
     axios.get(noticPageNoticList).then(data => {
       this.notelist = data.data;
     });
+    axios.post(serveList, {}).then(data => {
+      this.service = data.data.dataList;
+    });
     this.getList(this.theQuery);
   },
   methods: {
     //预约
-    convention(val){
-    this.$router.push({
-            path: "/Index/chooseServe",
-            query: {
-              id: val
-            }
-          });
+    convention(val) {
+      this.$router.push({
+        path: "/Index/chooseServe",
+        query: {
+          id: val
+        }
+      });
     },
 
     getList(data) {
@@ -84,7 +100,6 @@ export default {
   background: #ccccff;
 }
 .all {
-  // background:#99CCFF;
   height: 100%;
 }
 .imgBox {
@@ -127,43 +142,56 @@ p {
 .server {
   width: 70%;
   // height: 300px;
+
   margin: 20px auto;
   display: flex;
   justify-content: center;
   .theMain {
     width: 300px;
-    // height: 100px;
-    padding: 100px 0;
-    margin-right: 50px;
-    // overflow: hidden;
+    height: 400px;
+    // padding: 100px 0;
+    background: #f9f9f9;
+    margin: 10px;
+    border: 1px solid #e9e9e9;
+    transition: all 0.6s;
     img {
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       display: block;
+      margin: 10px auto;
       border-radius: 50%;
-      transition: all 0.6s;
-    }
-    img:hover {
-      transform: scale(1.1);
     }
   }
+  .theMain:hover {
+    transform: scale(1.03);
+  }
   .secondary {
+    background: #f9f9f9;
     width: 150px;
-    // height: 160px;
-    // padding: 90px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    height: 200px;
+    margin: 5px auto;
+    transition: all 0.6s;
+    border: 1px solid #e9e9e9;
+    p {
+      font-size: 12px;
+    }
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-around;
     img {
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       display: block;
+      margin: 0 auto;
       border-radius: 50%;
-      transition: all 0.6s;
+      // transition: all 0.6s;
     }
-    img:hover {
-      transform: scale(1.1);
-    }
+    // img:hover {
+    //   transform: scale(1.1);
+    // }
+  }
+  .secondary:hover {
+    transform: scale(1.03);
   }
 }
 </style>
