@@ -1,15 +1,6 @@
 <template>
   <div class="all">
     <div class="imgBox">
-      <div class="server">
-        <div class="theMain">
-          <img src="../assets/保洁.png" alt>
-        </div>
-        <div class="secondary">
-          <img src="../assets/保姆.png" alt>
-          <img src="../assets/维修.png" alt>
-        </div>
-      </div>
       <el-carousel>
         <el-carousel-item v-for="(item,index) in notelist" :key="index" @click="announcementView()">
           <h3 class="small">{{item.title}}</h3>
@@ -17,7 +8,16 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <p>保洁人员：</p>
+    <div class="server">
+      <div class="theMain">
+        <img @click="convention(4)" src="../assets/保洁.png" alt>
+      </div>
+      <div class="secondary">
+        <img @click="convention(6)" src="../assets/保姆.png" alt>
+        <img @click="convention(5)" src="../assets/维修.png" alt>
+      </div>
+    </div>
+    <!-- <p>保洁人员：</p>
     <div class="cenBox">
       <div
         class="cenImgBox"
@@ -30,7 +30,7 @@
         </div>
         <span>{{'人员名称:'+item.name}}</span>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -55,23 +55,16 @@ export default {
     this.getList(this.theQuery);
   },
   methods: {
-    //员工信息
-    employeesView(val) {
-      if (JSON.parse(sessionStorage.getItem("user"))) {
-        if (JSON.parse(sessionStorage.getItem("user")).code == "0") {
-          this.$router.push({
-            path: "/Index/employeesView",
+    //预约
+    convention(val){
+    this.$router.push({
+            path: "/Index/chooseServe",
             query: {
-              id: val.id
+              id: val
             }
           });
-        } else if (JSON.parse(sessionStorage.getItem("user")).code == "1") {
-          this.$message.error("员工禁止查看！");
-        }
-      } else {
-        this.$message.error("请先登录！");
-      }
     },
+
     getList(data) {
       axios.post(employee, data).then(data => {
         this.dataList = data.data.dataList;
@@ -87,7 +80,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .el-carousel {
-  width: 80%;
+  width: 100%;
   background: #ccccff;
 }
 .all {
@@ -130,59 +123,46 @@ p {
   margin-bottom: 20px;
   font-size: 20px;
 }
-.cenBox {
-  width: 70%;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  .cenImgBox {
-    width: 20%;
-    // height: 400px;
-    margin-bottom: 20px;
-    display: inline-block;
-    border: 1px solid rgb(255, 255, 255);
-    div {
-      display: inline-block;
-    }
-    .immmBox {
-      height: 300px;
-      width: 95%;
-      border: 1px solid rgb(255, 255, 255);
-      display: block;
-      margin: 5px auto;
-      // margin-top: 5px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-  .cenImgBox:hover {
-    box-shadow: 2px 4px 6px rgb(168, 168, 168);
-  }
-}
+
 .server {
-  width: 20%;
-  height: 300px;
+  width: 70%;
+  // height: 300px;
+  margin: 20px auto;
   display: flex;
+  justify-content: center;
   .theMain {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    // height: 100px;
     padding: 100px 0;
-    margin-left: 50px;
+    margin-right: 50px;
+    // overflow: hidden;
     img {
-      width: 100px;
-      height: 100px;
+      width: 300px;
+      height: 300px;
+      display: block;
+      border-radius: 50%;
+      transition: all 0.6s;
+    }
+    img:hover {
+      transform: scale(1.1);
     }
   }
   .secondary {
-    width: 100px;
-    height: 160px;
-        padding: 70px 0;
+    width: 150px;
+    // height: 160px;
+    // padding: 90px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     img {
-      width: 80px;
-      height: 80px;
+      width: 150px;
+      height: 150px;
+      display: block;
+      border-radius: 50%;
+      transition: all 0.6s;
+    }
+    img:hover {
+      transform: scale(1.1);
     }
   }
 }

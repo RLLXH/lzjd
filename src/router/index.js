@@ -13,6 +13,9 @@ import employeesView from '../pageDetail/employees/employeesView.vue'
 import orderManegement from '../pageDetail/orderManegement'
 import companyIntroduction from '../pageDetail/companyIntroduction.vue'
 import serveType from '../pageDetail/serveType'
+import chooseServe from '../pageDetail/chooseServe'
+import couManagement from '../pageDetail/couManagement'
+import wageManagement from '../pageDetail/wageManagement'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -74,6 +77,21 @@ export default new Router({
         path: 'serveType',
         name: '公司介绍',
         component: serveType
+      },
+      {
+        path: 'chooseServe',
+        name: '人员预约',
+        component: chooseServe
+      },
+      {
+        path: 'couManagement',
+        name: '客户管理',
+        component: couManagement
+      },
+      {
+        path: 'wageManagement',
+        name: '工资管理',
+        component: wageManagement
       },
       ]
     }

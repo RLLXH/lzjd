@@ -57,4 +57,13 @@ html {
 .el-tabs__item{
     width: 200px!important;
 }
+.el-tabs {
+  .el-tabs__header {
+    .el-tabs__nav-wrap {
+      .el-tabs__nav-scroll {
+        text-align: center;
+      }
+    }
+  }
+}
 </style>

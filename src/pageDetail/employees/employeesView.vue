@@ -32,26 +32,19 @@
         :rules="rules"
         ref="reservationInfo"
       >
-        <el-form-item label="选择日期:" prop="day">
+        <el-form-item label="开始时间:" prop="day">
           <el-date-picker
             v-model="reservationInfo.day"
             type="datetime"
             value-format="yyyy-MM-dd HH:mm:ss"
-            placeholder="选择日期时间"
+            placeholder="开始时间"
           ></el-date-picker>
         </el-form-item>
 
         <el-form-item label="服务名称 :" prop="serviceName">
-          <el-select v-model="reservationInfo.serviceName" placeholder>
-            <el-option
-              v-for="(item,index) in serviceType"
-              :key="index"
-              :label="item.value"
-              :value="item.id+','+item.value"
-            ></el-option>
-          </el-select>
+    {{reservationInfo.serviceName}}
         </el-form-item>
-        <el-form-item label="工作时间 : " prop="time">
+        <el-form-item label="次数 : " prop="time">
           <el-input
             v-model="reservationInfo.time"
             maxlength="2"
@@ -61,6 +54,9 @@
         </el-form-item>
         <el-form-item label="地址 : " prop="address">
           <el-input v-model="reservationInfo.address"></el-input>
+        </el-form-item>
+            <el-form-item label="单位 : " prop="unit">
+          <el-input v-model="reservationInfo.unit"></el-input>
         </el-form-item>
         <el-form-item label="备注 : " prop="houseName">
           <el-input type="textarea" v-model="reservationInfo.note"></el-input>
@@ -96,21 +92,24 @@ export default {
       imgState: false,
       employeeInfo: {},
       dialogVisibleAdd: false,
-      serviceType: [],
       cost: 10,
       totalPrice: 0,
       reservationInfo: {
         day: "",
         serviceName: "",
+        serviceCode :"",
         time: "",
         address: "",
-        note: ""
+        note: "",
+        unit:"",
+
       },
       rules: {
         time: [{ required: true, message: "请输入", trigger: "blur" }],
         day: [{ required: true, message: "请输入", trigger: "blur" }],
         address: [{ required: true, message: "请输入", trigger: "blur" }],
-        serviceName: [{ required: true, message: "请选择", trigger: "change" }]
+        serviceName: [{ required: true, message: "请选择", trigger: "change" }],
+        unit: [{ required: true, message: "请输入", trigger: "blur" }],
       }
     };
   },
@@ -118,10 +117,9 @@ export default {
     axios.get(employeeView + "?id=" + this.$route.query.id).then(data => {
       this.employeeInfo = data.data;
     });
-    axios.get(dictionaryGetapi + "?dicCode=" + "ZD20190016").then(data => {
-      console.log(data);
-      this.serviceType = data.data;
-    });
+console.log(this.$route.query.data)
+this.reservationInfo.serviceName=this.$route.query.data.name;
+this.reservationInfo.serviceCode=this.$route.query.data.code;
   },
   methods: {
     //计算总价
@@ -154,13 +152,14 @@ export default {
             employeeName: this.employeeInfo.name,
             id: "",
             price: this.cost,
-            serviceCode: this.reservationInfo.serviceName.split(",")[0],
-            serviceName: this.reservationInfo.serviceName.split(",")[1],
+            serviceCode: this.reservationInfo.serviceCode,
+            serviceName: this.reservationInfo.serviceName,
             startDate: this.reservationInfo.day,
             statusCode: "0",
             statusName: "待付款",
             text: this.reservationInfo.note,
-            time: this.reservationInfo.time - 0
+            time: this.reservationInfo.time - 0,
+            unit:this.reservationInfo.unit
           };
           console.log(data);
           axios.post(oderAdd, data).then(data => {
@@ -194,8 +193,8 @@ export default {
             employeeName: this.employeeInfo.name,
             id: "",
             price: this.cost,
-            serviceCode: this.reservationInfo.serviceName.split(",")[0],
-            serviceName: this.reservationInfo.serviceName.split(",")[1],
+            serviceCode:  this.reservationInfo.serviceCode,
+            serviceName:  this.reservationInfo.serviceName,
             startDate: this.reservationInfo.day,
             statusCode: "1",
             statusName: "待付款",

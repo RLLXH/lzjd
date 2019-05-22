@@ -17,6 +17,7 @@
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
             <el-table-column label="时长" prop="time"></el-table-column>
+             <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待付款"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -36,6 +37,7 @@
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
             <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待确认"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -56,6 +58,7 @@
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
             <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待评价"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -75,6 +78,7 @@
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
             <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"已完成"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -98,7 +102,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待确认"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -117,7 +122,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待评价"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -136,7 +142,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"已完成"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -160,7 +167,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待付款"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -180,7 +188,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待确认"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -199,7 +208,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待评价"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -218,7 +228,8 @@
             <el-table-column label="姓名" prop="employeeName"></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
-            <el-table-column label="时长" prop="time"></el-table-column>
+            <el-table-column label="次数" prop="time"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"已完成"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
