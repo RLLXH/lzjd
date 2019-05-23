@@ -17,6 +17,7 @@ import chooseServe from '../pageDetail/chooseServe'
 import couManagement from '../pageDetail/couManagement'
 import wageManagement from '../pageDetail/wageManagement'
 import personalInfo from "../pageDetail/personalInfo"
+import articleWagesManagement from "../pageDetail/articleWagesManagement"
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -98,6 +99,11 @@ export default new Router({
         path: 'personalInfo',
         name: '个人信息',
         component: personalInfo
+      },
+      {
+        path: 'articleWagesManagement',
+        name: '工资条管理',
+        component: articleWagesManagement
       },
       ]
     }

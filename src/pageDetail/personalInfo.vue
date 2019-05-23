@@ -15,10 +15,11 @@
     </div>
           <div class="info"  v-if="this.user.code=='0'">
 
-      <div class="theText">
+      <div class="theTexts">
         <div>名称:{{this.info.customerName}}</div>
         <div>地址:{{this.info.address}}</div>
         <div>电话:{{this.info.telephone}}</div>
+        <div>密码:{{this.info.customerPassword}}</div>
       </div>
     </div>
        <div class="button">
@@ -213,6 +214,14 @@ this.mobyleUserAdd = true;
       height: 300px;
     }
   }
+}
+.theTexts{
+      height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    //   border: 1px solid black;
+    margin: 0 auto;
 }
 .button {
   display: flex;

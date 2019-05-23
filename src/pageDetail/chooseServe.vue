@@ -15,7 +15,7 @@
         <p>{{item.text}}</p>
       </div>
     </div>
-    <p>保洁人员：</p>
+    <p>人员信息:</p>
     <div class="cenBox">
       <div
         class="cenImgBox"

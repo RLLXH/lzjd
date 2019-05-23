@@ -14,20 +14,28 @@
         <img @click="convention(4)" :src="this.service[2].picture" alt>
         <p>{{this.service[2].text}}</p>
       </div>
-      <div style="width:150px">
+          <div class="theMain">
+        <p style="text-align:center">{{this.service[0].name}}</p>
+        <img @click="convention(6)" :src="this.service[0].picture" alt>
+        <p>{{this.service[0].text}}</p>
+      </div>
+          <div class="theMain">
+        <p style="text-align:center">{{this.service[1].name}}</p>
+        <img @click="convention(5)" :src="this.service[1].picture" alt>
+        <p>{{this.service[1].text}}</p>
+      </div>
+      <!-- <div style="width:150px">
         <div class="secondary">
           <p style="text-align:center">{{this.service[0].name}}</p>
           <img @click="convention(6)" :src="this.service[0].picture" alt>
-          <!-- <img @click="convention(5)" :src="this.service[0].picture" alt> -->
           <p>{{this.service[0].text}}</p>
         </div>
         <div class="secondary">
-          <!-- <img @click="convention(6)" :src="this.service[1].picture" alt> -->
           <p style="text-align:center">{{this.service[1].name}}</p>
           <img @click="convention(5)" :src="this.service[1].picture" alt>
           <p>{{this.service[1].text}}</p>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- <p>保洁人员：</p>
     <div class="cenBox">
