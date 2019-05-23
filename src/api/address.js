@@ -47,3 +47,5 @@ export const wagesGetList = "/wages/getList"//工资条列表
 export const wagesAdd = "/wages/add"//工资条添加
 export const wagesView = "/wages/view"//工资条详情
 export const wagesUpdate = '/wages/update'//工资条修改
+export const applyUpdate = "/apply/update"//修改申请状态
+export const applyView ="/apply/view"//获取申请详情

@@ -8,16 +8,6 @@
       ref="postData"
       :rules="rules"
     >
-      <el-form-item label="申请状态:" prop="applySatatusName">
-        <el-select v-model="postData.applySatatusName" placeholder="请选择">
-          <el-option
-            v-for="(item,index) in statusList"
-            :key="index"
-            :label="item.name"
-            :value="item.name+','+item.dicCode"
-          ></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="申请类型:" prop="applyTypeName">
         <el-select v-model="postData.applyTypeName" placeholder="请选择">
           <el-option
@@ -47,7 +37,7 @@
   </div>
 </template>
 <script>
-import { dictionaryView,applyAdd } from "../../api/address.js";
+import { dictionaryView,applyAdd,dictionaryGetapi } from "../../api/address.js";
 import axios from "../../api/axios.js";
 export default {
   data() {
@@ -69,13 +59,7 @@ export default {
       },
       rules: {
         applyText: [{ required: true, message: "请输入", trigger: "blur" }],
-        applySatatusName: [
-          {
-            required: true,
-            message: "请选择",
-            trigger: "change"
-          }
-        ],
+
         applyTypeName: [
           {
             required: true,
@@ -112,14 +96,15 @@ export default {
       });
     },
     getdictionaryList() {
-      axios.get(dictionaryView + "?id=11").then(data => {
-        this.typeList = data.data.list;
+      axios.get(dictionaryGetapi + "?dicCode=ZD20190014").then(data => {
+        console.log(data)
+        this.typeList = data.data;
         console.log(this.typeList);
       });
-      axios.get(dictionaryView + "?id=10").then(data => {
-        this.statusList = data.data.list;
-        console.log(this.statusList);
-      });
+      // axios.get(dictionaryView + "?id=10").then(data => {
+      //   this.statusList = data.data.list;
+      //   console.log(this.statusList);
+      // });
     }
   }
 };
