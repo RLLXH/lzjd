@@ -28,7 +28,7 @@
           </div>
         </template>
       </el-table-column>-->
-      <el-table-column label="提成(%)" prop="percentage"></el-table-column>
+      <el-table-column label="绩效" prop="percentage"></el-table-column>
       <el-table-column label="罚款">
         <template slot-scope="scope">
           <div>
@@ -55,7 +55,7 @@
           <el-input v-model="postData.salary"></el-input>
         </el-form-item>
 
-        <el-form-item label="提成(%):">
+        <el-form-item label="绩效:">
           <el-input v-model="postData.percentage"></el-input>
         </el-form-item>
         <el-form-item label="罚款:">
@@ -74,13 +74,13 @@
     </el-dialog>
     <el-dialog title="修改员工" :visible.sync="mobyleVisibleAdd" width="30%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="updateDta">
-        <el-form-item label="名称:">
-          <span>{{updateDta.employeeName}}</span>
+        <el-form-item label="名称:" disabled>
+          <span style="width:200px;display:block">{{updateDta.employeeName}}</span>
         </el-form-item>
         <el-form-item label="底薪:">
-          <el-input v-model="updateDta.salary" disabled></el-input>
+          <el-input v-model="updateDta.salary"></el-input>
         </el-form-item>
-        <el-form-item label="提成(%):">
+        <el-form-item label="绩效:">
           <el-input v-model="updateDta.percentage"></el-input>
         </el-form-item>
 
@@ -110,7 +110,7 @@
         <el-form-item label="底薪:">
           <span>{{detailDtaa.salary}}</span>
         </el-form-item>
-        <el-form-item label="提成(%):">
+        <el-form-item label="绩效:">
           <span>{{detailDtaa.percentage}}</span>
         </el-form-item>
         <el-form-item label="罚款:">

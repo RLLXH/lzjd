@@ -16,8 +16,8 @@
         <el-table-column label="名称" prop="epmName"></el-table-column>
         <!-- <el-table-column label="密码" prop="password"></el-table-column> -->
         <el-table-column label="基础工资" prop="baseSalary"></el-table-column>
-        <el-table-column label="小时费" prop="cost"></el-table-column>
-        <el-table-column label="小时绩效" prop="performance"></el-table-column>
+        <el-table-column label="提成(%)" prop="cost"></el-table-column>
+        <!-- <el-table-column label="小时绩效" prop="performance"></el-table-column> -->
       </el-table>
       <el-dialog title="修改工资" :visible.sync="mobyleVisibleAdd" width="20%" center>
         <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
@@ -30,11 +30,8 @@
           <el-form-item label="基础工资:">
             <el-input v-model="updateDta.baseSalary"></el-input>
           </el-form-item>
-          <el-form-item label="小时费:">
+          <el-form-item label="提成(%):">
             <el-input v-model="updateDta.cost"></el-input>
-          </el-form-item>
-          <el-form-item label="小时绩效:">
-            <el-input v-model="updateDta.performance"></el-input>
           </el-form-item>
         </el-form>
         <el-row class="dialoBtnBox">
@@ -52,12 +49,10 @@
           <el-form-item label="基础工资:">
             <span>{{detailDtaa.baseSalary}}</span>
           </el-form-item>
-          <el-form-item label="小时费:">
+          <el-form-item label="提成(%):">
             <span>{{detailDtaa.cost}}</span>
           </el-form-item>
-          <el-form-item label="小时绩效:">
-            <span>{{detailDtaa.performance}}</span>
-          </el-form-item>
+       
         </el-form>
         <el-row class="dialoBtnBox">
           <el-button @click="quxiaoBtn">取消</el-button>
