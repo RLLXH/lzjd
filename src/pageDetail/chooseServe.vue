@@ -15,7 +15,26 @@
         <p>{{item.text}}</p>
       </div>
     </div>
-    <p>人员信息:</p>
+    <p v-if="this.dataList.length>0">人员信息:</p>
+    <div v-if="this.dataList.length==0" class="column">
+      <p>{{this.column.name}}</p>
+      <p>{{this.column.text}}</p>
+      <div v-if="this.column.id==6" class="columnImg">
+       <img src="../assets/rearing.jpg" alt="">
+        <img src="../assets/matron.jpg" alt="">
+         <img src="../assets/fangda_07.jpg" alt="">
+      </div>
+         <div v-if="this.column.id==4" class="columnImg">
+       <img src="../assets/2017y12m24d20h1m12s693.jpg" alt="">
+        <img src="../assets/2017y12m24d20h1m32s149 (1).jpg" alt="">
+         <img src="../assets/2017y12m24d20h2m15s389.jpg" alt="">
+      </div>
+             <div v-if="this.column.id==5" class="columnImg">
+       <img src="../assets/u=2202778623,909395816&fm=26&gp=0_WPS图片.jpg" alt="">
+        <img src="../assets/timg.jpg" alt="">
+         <img src="../assets/1496200992.jpg" alt="">
+      </div>
+    </div>
     <div class="cenBox">
       <div
         class="cenImgBox"
@@ -43,6 +62,11 @@ import axios from "../api/axios.js";
 export default {
   data() {
     return {
+      column: {
+        id:"",
+        name: "",
+        text: ""
+      },
       dataList: [],
       choose: "",
       details: {},
@@ -55,6 +79,7 @@ export default {
   },
   created() {
     //   console.log(this.$route.query.id),
+    this.column.id = this.$route.query.id;
     axios.get(serveView + "?id=" + this.$route.query.id).then(data => {
       console.log(data);
       data.data.list.map((v, k) => {
@@ -74,7 +99,9 @@ export default {
   methods: {
     handleClick(val) {
       console.log("123", val);
-      //   console.log(tab.$options.propsData.name);
+      this.column.name = val.name;
+      this.column.text = val.text;
+      console.log(this.column)
       this.choose = val.code;
       this.theQuery.serviceCode = val.code;
       axios.post(employeeList, this.theQuery).then(data => {
@@ -86,7 +113,7 @@ export default {
       let data = {};
       this.details.list.map((v, k) => {
         if (v.code == this.choose) {
-          console.log(v.name, v.code,v.unit, "??????????");
+          console.log(v.name, v.code, v.unit, "??????????");
           data = {
             name: v.name,
             code: v.code,
@@ -169,7 +196,20 @@ p {
     transform: scale(1.1);
   }
 }
-
+.column {
+  p:first-of-type {
+    font-size: 14px;
+  }
+}
+.columnImg{
+  display: flex;
+  justify-content: space-around;
+  margin: 100px 0;
+  img{
+    width: 302px;
+    height: 193px;
+  }
+}
 // .el-tabs{
 // .el-tabs__item{
 //     text-align:center;

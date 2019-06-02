@@ -8,18 +8,19 @@
         </el-carousel-item>
       </el-carousel>
     </div>
+    <div class="backgroundImg">
     <div v-if="this.service.length>0" class="server">
       <div class="theMain">
         <p style="text-align:center">{{this.service[2].name}}</p>
         <img @click="convention(4)" :src="this.service[2].picture" alt>
         <p>{{this.service[2].text}}</p>
       </div>
-          <div class="theMain">
+      <div class="theMain">
         <p style="text-align:center">{{this.service[0].name}}</p>
         <img @click="convention(6)" :src="this.service[0].picture" alt>
         <p>{{this.service[0].text}}</p>
       </div>
-          <div class="theMain">
+      <div class="theMain">
         <p style="text-align:center">{{this.service[1].name}}</p>
         <img @click="convention(5)" :src="this.service[1].picture" alt>
         <p>{{this.service[1].text}}</p>
@@ -35,7 +36,8 @@
           <img @click="convention(5)" :src="this.service[1].picture" alt>
           <p>{{this.service[1].text}}</p>
         </div>
-      </div> -->
+      </div>-->
+    </div>
     </div>
     <!-- <p>保洁人员：</p>
     <div class="cenBox">
@@ -149,19 +151,21 @@ p {
 
 .server {
   width: 70%;
-  // height: 300px;
+  height: 700px;
 
-  margin: 20px auto;
+  margin: auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items:center;
   .theMain {
     width: 300px;
     height: 400px;
     // padding: 100px 0;
-    background: #f9f9f9;
+    background: #f5f4f4ea;
     margin: 10px;
     border: 1px solid #e9e9e9;
     transition: all 0.6s;
+    color: black;
     img {
       width: 200px;
       height: 200px;
@@ -201,5 +205,12 @@ p {
   .secondary:hover {
     transform: scale(1.03);
   }
+}
+.backgroundImg{
+width: 100%;
+  background-image: url("../assets/main.jpg");
+  background-size:100% 100%; 
+  height: 700px;
+  opacity:0.6;
 }
 </style>

@@ -17,7 +17,7 @@
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="服务类型" prop="serviceName"></el-table-column>
             <el-table-column label="时长" prop="time"></el-table-column>
-             <el-table-column label="单位" prop="unit"></el-table-column>
+            <el-table-column label="单位" prop="unit"></el-table-column>
             <el-table-column label="总金额" prop="cost"></el-table-column>
             <el-table-column label="状态">{{"待付款"}}</el-table-column>
             <el-table-column label="时间" prop="startDate"></el-table-column>
@@ -353,8 +353,9 @@
         </div>
       </el-form>
     </el-dialog>
-    <div class="money" v-if="this.imgState">
+    <div class="money" @click="success" v-if="this.imgState">
       <img src="../assets/二维码.png" alt>
+      <p>请扫码付款</p>
     </div>
   </div>
 </template>
@@ -501,29 +502,26 @@ export default {
     payment(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log(this.orderModify);
-          this.orderModify.serviceCode = this.orderModify.serviceName.split(
-            ","
-          )[0];
-          this.orderModify.serviceName = this.orderModify.serviceName.split(
-            ","
-          )[1];
-          (this.orderModify.statusCode = "1"),
-            (this.orderModify.statusName = "待确认"),
-            axios.post(oderUpdate, this.orderModify).then(data => {
-              if (data.code == "0") {
-                this.imgState = true;
-                setTimeout(() => {
-                  this.imgState = false;
-                  this.$message.success("付款成功!");
-                  this.forThePaymentMessage();
-                  this.paymentHasBeenMessage();
-                  this.forThePaymentModifyState = false;
-                }, 3000);
-              }
-            });
+          this.imgState = true;
         }
       });
+    },
+    //付款
+    success() {
+      console.log(this.orderModify);
+      this.orderModify.serviceCode = this.orderModify.serviceName.split(",")[0];
+      this.orderModify.serviceName = this.orderModify.serviceName.split(",")[1];
+      (this.orderModify.statusCode = "1"),
+        (this.orderModify.statusName = "待确认"),
+        axios.post(oderUpdate, this.orderModify).then(data => {
+          if (data.code == "0") {
+              this.imgState = false;
+              this.$message.success("付款成功!");
+              this.forThePaymentMessage();
+              this.paymentHasBeenMessage();
+              this.forThePaymentModifyState = false;
+          }
+        });
     },
     //已付款列表
     paymentHasBeenMessage() {
@@ -738,13 +736,21 @@ span {
   width: 200px;
 }
 .money {
-  width: 300px;
-  height: 300px;
+  width: 330px;
+  height: 400px;
   position: absolute;
   left: 50%;
   top: 50%;
   margin: -150px 0 0 -150px;
   z-index: 999999;
+  background: white;
+  border: 1px solid rgb(196, 196, 196);
+  p {
+    width: 100%;
+    height: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
 }
 .overallPlanning {
   width: 80%;

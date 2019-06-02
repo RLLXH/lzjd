@@ -194,7 +194,7 @@
     </el-dialog>
     <el-dialog title="审核意见" :visible.sync="dialogAudit" width="30%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="applysAudit">
-        <el-form-item label="编号:">
+        <el-form-item label="意见:">
           <el-input
             type="textarea"
             :rows="2"

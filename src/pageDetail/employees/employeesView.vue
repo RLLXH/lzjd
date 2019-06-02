@@ -41,9 +41,7 @@
           ></el-date-picker>
         </el-form-item>
 
-        <el-form-item label="服务名称 :" prop="serviceName">
-    {{reservationInfo.serviceName}}
-        </el-form-item>
+        <el-form-item label="服务名称 :" prop="serviceName">{{reservationInfo.serviceName}}</el-form-item>
         <el-form-item label="次数 : " prop="time">
           <el-input
             v-model="reservationInfo.time"
@@ -55,8 +53,8 @@
         <el-form-item label="地址 : " prop="address">
           <el-input v-model="reservationInfo.address"></el-input>
         </el-form-item>
-            <el-form-item label="单位 : " prop="unit">
-         <span style="width:200px;display:block">{{reservationInfo.unit}}</span>
+        <el-form-item label="单位 : " prop="unit">
+          <span style="width:200px;display:block">{{reservationInfo.unit}}</span>
         </el-form-item>
         <el-form-item label="备注 : " prop="houseName">
           <el-input type="textarea" v-model="reservationInfo.note"></el-input>
@@ -73,8 +71,9 @@
         </el-row>
       </el-form>
     </el-dialog>
-    <div class="money" v-if="this.imgState">
+    <div class="money" @click="success" v-if="this.imgState">
       <img src="../../assets/二维码.png" alt>
+      <p>请扫码付款</p>
     </div>
   </div>
 </template>
@@ -97,19 +96,18 @@ export default {
       reservationInfo: {
         day: "",
         serviceName: "",
-        serviceCode :"",
+        serviceCode: "",
         time: "",
         address: "",
         note: "",
-        unit:"",
-
+        unit: ""
       },
       rules: {
         time: [{ required: true, message: "请输入", trigger: "blur" }],
         day: [{ required: true, message: "请输入", trigger: "blur" }],
         address: [{ required: true, message: "请输入", trigger: "blur" }],
         serviceName: [{ required: true, message: "请选择", trigger: "change" }],
-        unit: [{ required: true, message: "请输入", trigger: "blur" }],
+        unit: [{ required: true, message: "请输入", trigger: "blur" }]
       }
     };
   },
@@ -117,10 +115,10 @@ export default {
     axios.get(employeeView + "?id=" + this.$route.query.id).then(data => {
       this.employeeInfo = data.data;
     });
-console.log(this.$route.query.data)
-this.reservationInfo.serviceName=this.$route.query.data.name;
-this.reservationInfo.serviceCode=this.$route.query.data.code;
-this.reservationInfo.unit=this.$route.query.data.unit;
+    console.log(this.$route.query.data);
+    this.reservationInfo.serviceName = this.$route.query.data.name;
+    this.reservationInfo.serviceCode = this.$route.query.data.code;
+    this.reservationInfo.unit = this.$route.query.data.unit;
   },
   methods: {
     //计算总价
@@ -160,7 +158,7 @@ this.reservationInfo.unit=this.$route.query.data.unit;
             statusName: "待付款",
             text: this.reservationInfo.note,
             time: this.reservationInfo.time - 0,
-            unit:this.reservationInfo.unit
+            unit: this.reservationInfo.unit
           };
           console.log(data);
           axios.post(oderAdd, data).then(data => {
@@ -182,6 +180,12 @@ this.reservationInfo.unit=this.$route.query.data.unit;
     payment(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.imgState = true;
+        }
+      });
+    },
+    //付款
+    success() {
           let user = JSON.parse(sessionStorage.getItem("user"));
           console.log(user, this.serviceType);
           let data = {
@@ -206,8 +210,6 @@ this.reservationInfo.unit=this.$route.query.data.unit;
           axios.post(oderAdd, data).then(data => {
             console.log(data);
             if (data.code == "0") {
-              this.imgState = true;
-              setTimeout(() => {
                 this.imgState = false;
                 this.$message.success("付款成功!");
                 this.dialogVisibleAdd = false;
@@ -216,11 +218,8 @@ this.reservationInfo.unit=this.$route.query.data.unit;
                 this.reservationInfo.serviceName = "";
                 this.reservationInfo.address = "";
                 this.reservationInfo.note = "";
-              }, 3000);
             }
           });
-        }
-      });
     },
     //关闭弹窗
     cancel() {
@@ -268,12 +267,20 @@ this.reservationInfo.unit=this.$route.query.data.unit;
   margin: 20px 0;
 }
 .money {
-  width: 300px;
-  height: 300px;
+  width: 330px;
+  height: 400px;
   position: absolute;
   left: 50%;
   top: 50%;
   margin: -150px 0 0 -150px;
   z-index: 999999;
+  background: white;
+  border: 1px solid rgb(196, 196, 196);
+  p {
+    width: 100%;
+    height: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
 }
 </style>
