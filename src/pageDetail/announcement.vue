@@ -11,6 +11,7 @@
             <div>
               <el-button type="text" @click="detailBtnGm(scope.row.id)">查看</el-button>
               <el-button type="text" @click="mibileBtn(scope.row.id)">修改</el-button>
+              <el-button type="text" @click="AnnDelete(scope.row.id)">删除</el-button>
             </div>
           </template>
         </el-table-column>
@@ -47,7 +48,7 @@
           <el-button @click="subBtn">提交</el-button>
         </el-row>
       </el-dialog>
-      <el-dialog title="修改员工" :visible.sync="mobyleVisibleAdd" width="20%" center>
+      <el-dialog title="修改公告" :visible.sync="mobyleVisibleAdd" width="20%" center>
         <el-form label-position="right" label-width="100px" :inline="true" :model="updateDta">
           <el-form-item label="编号:">
             <el-input v-model="updateDta.code"></el-input>
@@ -121,7 +122,8 @@ import {
   noticeAdd,
   noticeList,
   noticeView,
-  noticeUpdate
+  noticeUpdate,
+  noticeDelete
 } from "../api/address.js";
 import axios from "../api/axios.js";
 import { createNamespacedHelpers } from "vuex";
@@ -232,6 +234,15 @@ export default {
         console.log(data);
         this.detailDtaa = data.data;
       });
+    },
+    //删除公告
+    AnnDelete(id){
+      axios.get(noticeDelete+"?id="+id).then(data=>{
+        if(data.code=="0"){
+          this.$message.success("删除成功!");
+          this.getList(this.theQuery);
+        }
+      })
     },
     //管理员详情
     detailBtnGm(val) {

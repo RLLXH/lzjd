@@ -25,7 +25,7 @@ export const oderList = "/oder/lits"//订单列表查询
 export const oderAdd = "/oder/add"//订单创建
 export const oderView = "/oder/view"//订单详情
 export const oderUpdate = "/oder/update"//修改订单
-export const add = "/add"//增加评论
+
 
 export const serveAdd = "/serviceType/add"//增加服务类型
 export const serveList = "/serviceType/list"//获取服务类型列表
@@ -49,3 +49,8 @@ export const wagesView = "/wages/view"//工资条详情
 export const wagesUpdate = '/wages/update'//工资条修改
 export const applyUpdate = "/apply/update"//修改申请状态
 export const applyView ="/apply/view"//获取申请详情
+export const commentsAdd = '/comments/add'//添加品论
+export const commentsGetDegree = '/comments/getDegree'//评价统计
+export const oderDelete = '/oder/delete'//删除订单
+export const noticeDelete = "/notice/delete"//删除公告
+export const commentsGerView = '/comments/getView'//根据编码获取评论

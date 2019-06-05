@@ -110,14 +110,17 @@ export default {
     },
     //员工信息
     employeesView(val) {
+  
       let data = {};
+          console.log(this.details.list)
       this.details.list.map((v, k) => {
         if (v.code == this.choose) {
-          console.log(v.name, v.code, v.unit, "??????????");
+          console.log(v.name, v.code, v.unit,v, "??????????");
           data = {
             name: v.name,
             code: v.code,
-            unit: v.unit
+            unit: v.unit,
+            cost:v.cost
           };
         }
       });

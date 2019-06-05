@@ -52,7 +52,7 @@
         <el-button @click="subBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="修改员工" :visible.sync="mobyleVisibleAdd" width="20%" center>
+    <el-dialog title="修改客户信息" :visible.sync="mobyleVisibleAdd" width="20%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
         <el-form-item label="名称:">
           <el-input v-model="updateDta.customerName"></el-input>
@@ -76,7 +76,7 @@
         <el-button @click="updataBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="员工详情" :visible.sync="dialogVisibleDetail" width="30%">
+    <el-dialog title="客户详情" :visible.sync="dialogVisibleDetail" width="30%">
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
         <el-form-item label="名称:">
           <span>{{detailDtaa.customerName}}</span>

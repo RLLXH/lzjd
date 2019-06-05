@@ -89,7 +89,7 @@
         <el-button @click="subBtn('postData')">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="修改基本信息" :visible.sync="mobyleVisibleAdd" width="60%" center>
+    <el-dialog title="修改服务类型" :visible.sync="mobyleVisibleAdd" width="60%" center>
       <el-form :model="updateDta" :rules="rules" ref="updateDta">
         <el-form-item label="服务名称 :" prop="name">
           <el-input v-model="updateDta.name" placeholder="服务名称"></el-input>

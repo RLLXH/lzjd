@@ -8,8 +8,9 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                   <el-button type="text" @click="forThePaymentModify(scope.row.id)">修改</el-button>
+                  <el-button type="text" @click="forThePaymentDelete(scope.row.id)">删除</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -29,7 +30,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -49,7 +50,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                   <el-button type="text" @click="commentStateWidow(scope.row)">评价</el-button>
                 </div>
               </template>
@@ -70,7 +71,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -94,7 +95,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                   <el-button type="text" @click="affirm(scope.row.id)">确认</el-button>
                 </div>
               </template>
@@ -115,7 +116,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -135,7 +136,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -159,7 +160,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                   <el-button type="text" @click="forThePaymentModify(scope.row.id)">修改</el-button>
                 </div>
               </template>
@@ -180,7 +181,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                   <el-button type="text" @click="affirm(scope.row.id)">确认</el-button>
                 </div>
               </template>
@@ -201,7 +202,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -221,7 +222,7 @@
             <el-table-column label="操作" width="190">
               <template slot-scope="scope">
                 <div>
-                  <el-button type="text" @click="forThePaymentView(scope.row.id)">查看</el-button>
+                  <el-button type="text" @click="forThePaymentView(scope.row)">查看</el-button>
                 </div>
               </template>
             </el-table-column>
@@ -261,6 +262,9 @@
         </el-form-item>
         <el-form-item label="总价 : ">
           <span>{{orderView.cost}}</span>
+        </el-form-item>
+        <el-form-item v-if="this.orderView.texts" label="评论 : ">
+          <span>{{orderView.texts}}</span>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -366,7 +370,9 @@ import {
   dictionaryGetapi,
   oderUpdate,
   loginUpload,
-  add
+  commentsAdd,
+  oderDelete,
+  commentsGerView
 } from "../api/address.js";
 import axios from "../api/axios.js";
 export default {
@@ -438,8 +444,17 @@ export default {
   methods: {
     //查看详情ajax
     getView(val) {
-      axios.get(oderView + "?id=" + val).then(data => {
+      // let text = "";
+      let that = this;
+      axios.get(oderView + "?id=" + val.id).then(data => {
         this.orderView = data.data;
+        axios.post(commentsGerView + "?oder_Code=" + val.code).then(data => {
+          console.log(data, "3123123123123");
+          if (data.data != null) {
+            // this.orderView.texts = data.data.text
+            this.$set(this.orderView, "texts", data.data.text);
+          }
+        });
       });
     },
     //修改获取详情ajax
@@ -451,6 +466,15 @@ export default {
       });
     },
     //客户获取列表
+    //删除订单
+    forThePaymentDelete(id) {
+      axios.get(oderDelete + "?id=" + id).then(data => {
+        if (data.code == "0") {
+          this.$message.success("删除成功!");
+          this.forThePaymentMessage();
+        }
+      });
+    },
     //待付款列表
     forThePaymentMessage() {
       let user = JSON.parse(sessionStorage.getItem("user"));
@@ -466,6 +490,7 @@ export default {
     },
     //待付款查看
     forThePaymentView(val) {
+      console.log(val);
       this.getView(val);
       this.forThePaymentViewState = true;
     },
@@ -515,11 +540,11 @@ export default {
         (this.orderModify.statusName = "待确认"),
         axios.post(oderUpdate, this.orderModify).then(data => {
           if (data.code == "0") {
-              this.imgState = false;
-              this.$message.success("付款成功!");
-              this.forThePaymentMessage();
-              this.paymentHasBeenMessage();
-              this.forThePaymentModifyState = false;
+            this.imgState = false;
+            this.$message.success("付款成功!");
+            this.forThePaymentMessage();
+            this.paymentHasBeenMessage();
+            this.forThePaymentModifyState = false;
           }
         });
     },
@@ -701,7 +726,7 @@ export default {
             scoreName: this.comment.satisfaction.split(",")[1],
             text: this.comment.comment
           };
-          axios.post(add, data).then(data => {
+          axios.post(commentsAdd, data).then(data => {
             console.log(data);
             if (data.code == "0") {
               (this.commentInfo.statusCode = "3"),

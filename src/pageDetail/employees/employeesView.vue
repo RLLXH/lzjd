@@ -5,20 +5,26 @@
         <img :src="this.employeeInfo.picture">
       </div>
       <div class="theText">
-        <div>保洁员姓名:{{this.employeeInfo.name}}</div>
+        <div>姓名:{{this.employeeInfo.name}}</div>
         <div>地址:{{this.employeeInfo.address}}</div>
+        <div>性别:{{this.employeeInfo.sex==0?'女':'男'}}</div>
         <div>电话:{{this.employeeInfo.phone}}</div>
       </div>
     </div>
-    <div class="evaluation">
-      <p>保洁员评价:</p>
+    <div class="statistical">
+      <div class="statisticals" v-for="(item,index) in this.statistical" :key="index">
+        <span>{{item.name+':'+item.satisfactionNum}}</span>
+      </div>
     </div>
+    <!-- <div class="evaluation">
+      <p>评价:</p>
+    </div> -->
     <div class="button">
       <el-button @click="reservation()">预约</el-button>
       <el-button @click="exit()">返回</el-button>
     </div>
     <el-dialog
-      title="预约保洁员"
+      title="预约人员"
       :visible.sync="dialogVisibleAdd"
       :before-close="cancel"
       width="50%"
@@ -78,7 +84,12 @@
   </div>
 </template>
 <script>
-import { employeeView, dictionaryGetapi, oderAdd } from "../../api/address.js";
+import {
+  employeeView,
+  dictionaryGetapi,
+  oderAdd,
+  commentsGetDegree
+} from "../../api/address.js";
 import axios from "../../api/axios.js";
 import { createNamespacedHelpers } from "vuex";
 import { setTimeout } from "timers";
@@ -88,10 +99,11 @@ const { mapState, mapActions, mapmutations } = createNamespacedHelpers(
 export default {
   data() {
     return {
+      statistical: [],
       imgState: false,
       employeeInfo: {},
       dialogVisibleAdd: false,
-      cost: 10,
+      cost: "",
       totalPrice: 0,
       reservationInfo: {
         day: "",
@@ -114,11 +126,20 @@ export default {
   created() {
     axios.get(employeeView + "?id=" + this.$route.query.id).then(data => {
       this.employeeInfo = data.data;
+      axios
+        .post(commentsGetDegree + "?employeesCode=" + this.employeeInfo.code)
+        .then(data => {
+          console.log(data);
+          this.statistical = data.data;
+        });
     });
+
     console.log(this.$route.query.data);
     this.reservationInfo.serviceName = this.$route.query.data.name;
     this.reservationInfo.serviceCode = this.$route.query.data.code;
     this.reservationInfo.unit = this.$route.query.data.unit;
+    this.cost = this.$route.query.data.cost;
+
   },
   methods: {
     //计算总价
@@ -165,12 +186,13 @@ export default {
             console.log(data);
             if (data.code == "0") {
               this.$message.success("创建成功!");
-              this.dialogVisibleAdd = false;
-              this.reservationInfo.day = "";
-              this.reservationInfo.time = "";
-              this.reservationInfo.serviceName = "";
-              this.reservationInfo.address = "";
-              this.reservationInfo.note = "";
+              // this.dialogVisibleAdd = false;
+              // this.reservationInfo.day = "";
+              // this.reservationInfo.time = "";
+              // this.reservationInfo.serviceName = "";
+              // this.reservationInfo.address = "";
+              // this.reservationInfo.note = "";
+               this.$router.go(-1);
             }
           });
         }
@@ -186,40 +208,41 @@ export default {
     },
     //付款
     success() {
-          let user = JSON.parse(sessionStorage.getItem("user"));
-          console.log(user, this.serviceType);
-          let data = {
-            address: this.reservationInfo.address,
-            code: "",
-            cost: this.totalPrice,
-            customerCode: user.userCode,
-            customerName: user.userName,
-            employeeCode: this.employeeInfo.code,
-            employeeName: this.employeeInfo.name,
-            id: "",
-            price: this.cost,
-            serviceCode:  this.reservationInfo.serviceCode,
-            serviceName:  this.reservationInfo.serviceName,
-            startDate: this.reservationInfo.day,
-            statusCode: "1",
-            statusName: "待付款",
-            text: this.reservationInfo.note,
-            time: this.reservationInfo.time - 0
-          };
-          console.log(data);
-          axios.post(oderAdd, data).then(data => {
-            console.log(data);
-            if (data.code == "0") {
-                this.imgState = false;
-                this.$message.success("付款成功!");
-                this.dialogVisibleAdd = false;
-                this.reservationInfo.day = "";
-                this.reservationInfo.time = "";
-                this.reservationInfo.serviceName = "";
-                this.reservationInfo.address = "";
-                this.reservationInfo.note = "";
-            }
-          });
+      let user = JSON.parse(sessionStorage.getItem("user"));
+      console.log(user, this.serviceType);
+      let data = {
+        address: this.reservationInfo.address,
+        code: "",
+        cost: this.totalPrice,
+        customerCode: user.userCode,
+        customerName: user.userName,
+        employeeCode: this.employeeInfo.code,
+        employeeName: this.employeeInfo.name,
+        id: "",
+        price: this.cost,
+        serviceCode: this.reservationInfo.serviceCode,
+        serviceName: this.reservationInfo.serviceName,
+        startDate: this.reservationInfo.day,
+        statusCode: "1",
+        statusName: "待付款",
+        text: this.reservationInfo.note,
+        time: this.reservationInfo.time - 0
+      };
+      console.log(data);
+      axios.post(oderAdd, data).then(data => {
+        console.log(data);
+        if (data.code == "0") {
+          this.imgState = false;
+          this.$message.success("付款成功!");
+          // this.dialogVisibleAdd = false;
+          // this.reservationInfo.day = "";
+          // this.reservationInfo.time = "";
+          // this.reservationInfo.serviceName = "";
+          // this.reservationInfo.address = "";
+          // this.reservationInfo.note = "";
+           this.$router.go(-1);
+        }
+      });
     },
     //关闭弹窗
     cancel() {
@@ -282,5 +305,11 @@ export default {
     font-size: 20px;
     text-align: center;
   }
+}
+.statistical{
+  width: 60%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around
 }
 </style>

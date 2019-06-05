@@ -9,7 +9,7 @@
       ref="user"
     >
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="客户登陆" name="0">
+        <el-tab-pane label="客户登录" name="0">
           <el-form-item label="用户名:" prop="userName">
             <el-input v-model="user.userName"></el-input>
           </el-form-item>
@@ -17,7 +17,7 @@
             <el-input v-model="user.password" type="password"></el-input>
           </el-form-item>
         </el-tab-pane>
-        <el-tab-pane label="管理后台登陆" name="1">
+        <el-tab-pane label="管理后台登录" name="1">
           <el-form-item label="管理员用户名:" prop="userName">
             <el-input v-model="user.userName"></el-input>
           </el-form-item>
@@ -27,8 +27,12 @@
         </el-tab-pane>
       </el-tabs>
       <el-row>
-        <el-button @click="loadBtn('user')">登陆</el-button>
-        <el-button @click="regin()">注册</el-button>
+        <el-button @click="loadBtn('user')">登录</el-button>
+
+      </el-row>
+      <el-row>
+                <el-button @click="regin(1)">用户注册</el-button>
+        <el-button @click="regin(2)">员工注册</el-button>
       </el-row>
     </el-form>
   </div>
@@ -56,8 +60,14 @@ export default {
   },
   methods: {
     ...mapActions(["setloadingData", "setuserInfo"]),
-    regin() {
-      this.$router.push("/Index/Registered");
+    regin(id) {
+      // this.$router.push("/Index/Registered");
+              this.$router.push({
+            path: "/Index/Registered",
+            query: {
+              id: id
+            }
+          });
     },
     handleClick() {
       console.log(this.activeName, "???????");
@@ -83,13 +93,13 @@ export default {
                   };
                    sessionStorage.setItem("user", JSON.stringify(data.data));
                    this.setuserInfo(data.data);
-                  this.$message.success("管理员登陆成功！");
+                  this.$message.success("管理员登录成功！");
                   this.$router.push({
                     path: "/Index/Grad"
                   });
                 } else {
-                  console.log("登陆成功", data.data);
-                  this.$message.success("登陆成功！");
+                  console.log("登录成功", data.data);
+                  this.$message.success("登录成功！");
                   data.data.code = this.activeName;
                   sessionStorage.setItem("user", JSON.stringify(data.data));
                   this.setuserInfo(data.data);

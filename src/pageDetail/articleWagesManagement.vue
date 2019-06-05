@@ -39,7 +39,7 @@
       <el-table-column label="年份" prop="year"></el-table-column>
       <el-table-column label="月份" prop="month"></el-table-column>
     </el-table>
-    <el-dialog title="新增客户" :visible.sync="dialogVisibleAdd" width="30%" center>
+    <el-dialog title="新增员工工资" :visible.sync="dialogVisibleAdd" width="30%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
         <el-form-item label="员工:">
           <el-select v-model="employee" placeholder="请选择">
@@ -72,7 +72,7 @@
         <el-button @click="subBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="修改员工" :visible.sync="mobyleVisibleAdd" width="30%" center>
+    <el-dialog title="修改工资" :visible.sync="mobyleVisibleAdd" width="30%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="updateDta">
         <el-form-item label="名称:" disabled>
           <span style="width:200px;display:block">{{updateDta.employeeName}}</span>
@@ -99,7 +99,7 @@
         <el-button @click="updataBtn">提交</el-button>
       </el-row>
     </el-dialog>
-    <el-dialog title="员工详情" :visible.sync="dialogVisibleDetail" width="30%">
+    <el-dialog title="工资详情" :visible.sync="dialogVisibleDetail" width="30%">
       <el-form label-position="right" label-width="100px" :inline="true" :model="postData">
         <el-form-item label="名称:">
           <span>{{detailDtaa.employeeName}}</span>

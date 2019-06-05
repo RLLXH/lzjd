@@ -7,7 +7,7 @@
       <div class="theText">
         <div>姓名:{{this.info.name}}</div>
         <div v-if="this.info.sex==0">性别:男</div>
-        <div v-if="this.info.sex==1">性别:{女</div>
+        <div v-if="this.info.sex==1">性别:女</div>
         <div>地址:{{this.info.address}}</div>
         <div>电话:{{this.info.phone}}</div>
         <div>状态:{{this.info.statusName}}</div>
@@ -75,7 +75,7 @@
       </el-row>
     </el-dialog>
 
-      <el-dialog title="修改员工" :visible.sync="mobyleUserAdd" width="20%" center>
+      <el-dialog title="修改个人信息" :visible.sync="mobyleUserAdd" width="20%" center>
       <el-form label-position="right" label-width="100px" :inline="true" :model="updateDta">
         <el-form-item label="名称:">
           <el-input v-model="updateDta.customerName"></el-input>
