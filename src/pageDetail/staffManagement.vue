@@ -21,7 +21,7 @@
       <el-table-column label="性别" prop="sex">
         <template slot-scope="scope">
           <div>
-            <span>{{scope.row.sex?'女':'男'}}</span>
+            <span>{{scope.row.sex?'男':'女'}}</span>
           </div>
         </template>
       </el-table-column>
@@ -42,8 +42,8 @@
         </el-form-item>
         <el-form-item label="性别:">
           <el-select v-model="postData.sex">
-            <el-option value="0" label="男"></el-option>
-            <el-option value="1" label="女"></el-option>
+            <el-option value="1" label="男"></el-option>
+            <el-option value="0" label="女"></el-option>
           </el-select>
           <!-- <el-input v-model="postData.sex"></el-input> -->
         </el-form-item>
@@ -91,8 +91,8 @@
         <el-form-item label="性别:">
           <!-- <el-input v-model="updateDta.sex"> -->
           <el-select v-model="updateDta.sex">
-            <el-option :value="0" label="男"></el-option>
-            <el-option :value="1" label="女"></el-option>
+            <el-option :value="1" label="男"></el-option>
+            <el-option :value="0" label="女"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="电话:">
@@ -137,7 +137,7 @@
           <span>{{detailDtaa.password}}</span>
         </el-form-item>
         <el-form-item label="性别:">
-          <span>{{detailDtaa.sex}}</span>
+          <span>{{detailDtaa.sex?'男':'女'}}</span>
         </el-form-item>
         <el-form-item label="电话:">
           <span>{{detailDtaa.phone}}</span>

@@ -47,8 +47,8 @@
       </el-form-item>
       <el-form-item label="性别:" prop="sex">
         <el-select v-model="postData.sex">
-          <el-option value="0" label="男"></el-option>
-          <el-option value="1" label="女"></el-option>
+          <el-option value="1" label="男"></el-option>
+          <el-option value="0" label="女"></el-option>
         </el-select>
         <!-- <el-input v-model="postData.sex"></el-input> -->
       </el-form-item>

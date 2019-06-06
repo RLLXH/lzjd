@@ -4,7 +4,7 @@
       <el-carousel>
         <el-carousel-item v-for="(item,index) in notelist" :key="index" @click="announcementView()">
           <h3 class="small">{{item.title}}</h3>
-          <span>{{item.text}}</span>
+          <span class="smalls">{{item.text}}</span>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -107,7 +107,10 @@ export default {
 <style lang="less" scoped>
 .el-carousel {
   width: 100%;
-  background: #ccccff;
+  background: white;
+   background-image: url("../assets/家政公告.png");
+    opacity:0.6;
+    background-size:100% 100%; 
 }
 .all {
   height: 100%;
@@ -212,5 +215,14 @@ width: 100%;
   background-size:100% 100%; 
   height: 700px;
   opacity:0.6;
+}
+.small{
+  font-size: 40px;
+  color: black;
+  margin-top: 150px
+}
+.smalls{
+  font-size: 20px;
+  color: black;
 }
 </style>

@@ -6,8 +6,8 @@
       </div>
       <div class="theText">
         <div>姓名:{{this.info.name}}</div>
-        <div v-if="this.info.sex==0">性别:男</div>
-        <div v-if="this.info.sex==1">性别:女</div>
+        <div v-if="this.info.sex==1">性别:男</div>
+        <div v-if="this.info.sex==0">性别:女</div>
         <div>地址:{{this.info.address}}</div>
         <div>电话:{{this.info.phone}}</div>
         <div>状态:{{this.info.statusName}}</div>
@@ -40,8 +40,8 @@
         <el-form-item label="性别:">
           <!-- <el-input v-model="updateDta.sex"> -->
           <el-select v-model="updateDta.sex">
-            <el-option :value="0" label="男"></el-option>
-            <el-option :value="1" label="女"></el-option>
+            <el-option :value="1" label="男"></el-option>
+            <el-option :value="0" label="女"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="电话:">

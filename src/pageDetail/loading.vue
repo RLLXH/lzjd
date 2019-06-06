@@ -28,10 +28,9 @@
       </el-tabs>
       <el-row>
         <el-button @click="loadBtn('user')">登录</el-button>
-
       </el-row>
       <el-row>
-                <el-button @click="regin(1)">用户注册</el-button>
+        <el-button @click="regin(1)">用户注册</el-button>
         <el-button @click="regin(2)">员工注册</el-button>
       </el-row>
     </el-form>
@@ -62,12 +61,12 @@ export default {
     ...mapActions(["setloadingData", "setuserInfo"]),
     regin(id) {
       // this.$router.push("/Index/Registered");
-              this.$router.push({
-            path: "/Index/Registered",
-            query: {
-              id: id
-            }
-          });
+      this.$router.push({
+        path: "/Index/Registered",
+        query: {
+          id: id
+        }
+      });
     },
     handleClick() {
       console.log(this.activeName, "???????");
@@ -87,12 +86,12 @@ export default {
               if (data.code == "0") {
                 if (data.data == "admin") {
                   // data.code
-                  console.log(data,"??????")
+                  console.log(data, "??????");
                   data.data = {
-                    code:"2"
+                    code: "2"
                   };
-                   sessionStorage.setItem("user", JSON.stringify(data.data));
-                   this.setuserInfo(data.data);
+                  sessionStorage.setItem("user", JSON.stringify(data.data));
+                  this.setuserInfo(data.data);
                   this.$message.success("管理员登录成功！");
                   this.$router.push({
                     path: "/Index/Grad"
