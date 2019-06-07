@@ -18,11 +18,25 @@
     </div>
     <!-- <div class="evaluation">
       <p>评价:</p>
-    </div> -->
+    </div>-->
     <div class="button">
       <el-button @click="reservation()">预约</el-button>
       <el-button @click="exit()">返回</el-button>
+      <el-button @click="pinglunBtn()" type="text">查看评论</el-button>
     </div>
+    <el-dialog title="评论详情" :visible.sync="pinglun" width="50%" center top="25%"> 
+      <el-table :data="pinglunList" style="width: 100%" border>
+        <el-table-column label="序号" type="index" width="80"></el-table-column>
+        <el-table-column label="评论" prop="text"></el-table-column>
+        <el-table-column label="图片" prop="picture">
+          <template slot-scope="scope">
+            <div class='imgBox'>
+              <img :src="scope.row.picture" alt="">
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
     <el-dialog
       title="预约人员"
       :visible.sync="dialogVisibleAdd"
@@ -88,7 +102,8 @@ import {
   employeeView,
   dictionaryGetapi,
   oderAdd,
-  commentsGetDegree
+  commentsGetDegree,
+  commentsGetList
 } from "../../api/address.js";
 import axios from "../../api/axios.js";
 import { createNamespacedHelpers } from "vuex";
@@ -99,6 +114,8 @@ const { mapState, mapActions, mapmutations } = createNamespacedHelpers(
 export default {
   data() {
     return {
+      pinglun: false,
+
       statistical: [],
       imgState: false,
       employeeInfo: {},
@@ -113,6 +130,16 @@ export default {
         address: "",
         note: "",
         unit: ""
+      },
+      pinglunList: [],
+      pinglunData: {
+        customerCode: "",
+        employeesCode: "",
+        oderCode: "",
+        pageNo: 1,
+        pageSize:20
+
+       
       },
       rules: {
         time: [{ required: true, message: "请输入", trigger: "blur" }],
@@ -139,9 +166,19 @@ export default {
     this.reservationInfo.serviceCode = this.$route.query.data.code;
     this.reservationInfo.unit = this.$route.query.data.unit;
     this.cost = this.$route.query.data.cost;
-
   },
   methods: {
+    getpinglunList() {
+      this.pinglunData.employeesCode = this.employeeInfo.code;
+      axios.post(commentsGetList, this.pinglunData).then(data => {
+        console.log(data);
+        this.pinglunList = data.data.dataList;
+      });
+    },
+    pinglunBtn() {
+      this.getpinglunList();
+      this.pinglun = true;
+    },
     //计算总价
     calculate() {
       //算日期间天数
@@ -192,7 +229,7 @@ export default {
               // this.reservationInfo.serviceName = "";
               // this.reservationInfo.address = "";
               // this.reservationInfo.note = "";
-               this.$router.go(-1);
+              this.$router.go(-1);
             }
           });
         }
@@ -240,7 +277,7 @@ export default {
           // this.reservationInfo.serviceName = "";
           // this.reservationInfo.address = "";
           // this.reservationInfo.note = "";
-           this.$router.go(-1);
+          this.$router.go(-1);
         }
       });
     },
@@ -258,6 +295,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .info {
   display: flex;
   width: 60%;
@@ -306,10 +344,14 @@ export default {
     text-align: center;
   }
 }
-.statistical{
+.statistical {
   width: 60%;
   margin: 20px auto;
   display: flex;
-  justify-content: space-around
+  justify-content: space-around;
+}
+.imgBox{
+  width: 30px;
+  height: 30px;
 }
 </style>

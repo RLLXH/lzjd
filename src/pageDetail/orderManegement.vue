@@ -245,9 +245,8 @@
           <span>{{orderView.startDate}}</span>
         </el-form-item>
 
-        <el-form-item label="类型 : ">
-          <span>{{orderView.serviceName}}</span>
-        </el-form-item>
+      
+      
         <el-form-item label="时间 : ">
           <span>{{orderView.time}}</span>
         </el-form-item>

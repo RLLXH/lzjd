@@ -54,3 +54,4 @@ export const commentsGetDegree = '/comments/getDegree'//评价统计
 export const oderDelete = '/oder/delete'//删除订单
 export const noticeDelete = "/notice/delete"//删除公告
 export const commentsGerView = '/comments/getView'//根据编码获取评论
+export const commentsGetList = '/comments/getList' //评论list
